@@ -6,9 +6,11 @@ import { CredentialResponse } from "@react-oauth/google";
 import { get, post } from "../utilities";
 import NotFound from "./pages/NotFound";
 import Main from "./pages/Main";
+import Test from "./pages/Test";
 import { socket } from "../client-socket";
 import User from "../../../shared/User";
 import "../utilities.css";
+import Results from "./pages/Results";
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -45,9 +47,12 @@ const App = () => {
 
   // NOTE:
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
+
   return (
     <Router>
       <Main path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <Test path="test" userId={userId} handleLogout={handleLogout} />
+      <Results path="results" userId={userId} handleLogout={handleLogout} />
       <NotFound default={true} />
     </Router>
   );
