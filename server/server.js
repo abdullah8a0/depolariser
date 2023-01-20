@@ -33,9 +33,10 @@ const socketManager = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-const mongoConnectionURL = "FILL ME IN";
+const mongoConnectionURL =
+  "mongodb+srv://admin:AeY_-PSPTdjM$3*@cluster0.lm9nay9.mongodb.net/?retryWrites=true&w=majority";
 // TODO change database name to the name you chose
-const databaseName = "FILL ME IN";
+const databaseName = "Cluster0";
 
 // connect to mongodb
 mongoose
@@ -57,8 +58,7 @@ app.use(express.json());
 // set up a session, which will persist login data across requests
 app.use(
   session({
-    // TODO: add a SESSION_SECRET string in your .env file, and replace the secret with process.env.SESSION_SECRET
-    secret: "session-secret",
+    secret: process.env.SESSION_SECRET ? process.env.SESSION_SECRET : "secret",
     resave: false,
     saveUninitialized: false,
   })
