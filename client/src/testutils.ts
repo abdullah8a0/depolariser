@@ -1,8 +1,8 @@
 export type SingleTest = {
   id: string;
   question: string;
-  options: Array<string>;
-  type: "boolean" | "number";
+  type: "option" | "scale" | "bool";
+  options?: Array<string>;
   min?: number;
   max?: number;
   step?: number;
@@ -66,18 +66,22 @@ export class TestObject implements TestInterface {
       {
         id: "test1",
         question: "Is this a test?",
-        options: ["Yes", "No"],
-        type: "boolean",
+        type: "bool",
       },
       {
         id: "test2",
         question: "How many tests are there?",
-        options: ["1", "2", "3", "4", "5"],
-        type: "number",
+        type: "scale",
         min: 1,
         max: 5,
         step: 1,
         default: 1,
+      },
+      {
+        id: "test3",
+        question: "What is the best test?",
+        type: "option",
+        options: ["test1", "test2", "test3"],
       },
     ];
     return Promise.resolve(tests);
