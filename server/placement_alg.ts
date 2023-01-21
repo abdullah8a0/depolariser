@@ -22,9 +22,12 @@ export const generateDescriptor = (selections: string, userId: string): Descript
   for (const [key, value] of Object.entries(selectionsJSON) as [string, string][]) {
     if (key.match(/^1\./)) {
       q1Answers.push(parseInt(value));
-    } else if (key.match(/^2\./)) {
-      q2Answers.push(parseInt(value));
+    } else if (key.match(/^2.1\./)) {
+      q21Answers.push(parseInt(value));
+    } else if (key.match(/^2.2\./)) {
+      q22Answers.push(parseInt(value));
     } else if (key.match(/^3\./)) {
+      q3Anwers.push(parseInt(value));
     }
   }
   return new Descriptor({
@@ -34,5 +37,7 @@ export const generateDescriptor = (selections: string, userId: string): Descript
 };
 
 export const fecthResults = (descriptor: DescriptorInterface): string => {
+  descriptor.DescVector[0];
+  descriptor.DescVector[1];
   return "Commie";
 };
