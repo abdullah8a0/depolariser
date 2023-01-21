@@ -75,11 +75,53 @@ type ButtonProps = RouteComponentProps & {
   tester: TestObject;
 };
 const Button = (props: ButtonProps) => {
-  // const { selection, setSelection } = useState<number>(0);
-
-  if (props.test.type === "number") {
-    const options = props.test.options.map((option, i) => (
-      <button className="testOption" key={i} onClick={() => props.tester.addSel(props.test.id, option)}>
+  const [selection, setSelection] = useState<number>(0);
+  if (props.test.type === "scale") {
+    const slider = (
+      <>
+        <input
+          className="testScale"
+          type="range"
+          min={props.test.min}
+          max={props.test.max}
+          step={props.test.step}
+          defaultValue={props.test.default}
+          onChange={(e) => {
+            props.tester.addSel(props.test.id, e.target.value);
+          }}
+        />
+      </>
+    );
+    return (
+      <>
+        <p className="testStatement">{props.test.question}</p>
+        {slider}
+      </>
+    );
+  } else if (props.test.type === "bool") {
+    return (
+      <>
+        <button
+          className="testBool"
+          onClick={() => {
+            setSelection(1 - selection);
+            props.tester.addSel(props.test.id, selection.toString());
+          }}
+        >
+          <p className="testStatement">{props.test.question}</p>
+        </button>
+      </>
+    );
+  } else if (props.test.type === "option") {
+    const options = props.test.options!.map((option, i) => (
+      <button
+        className="testOption"
+        onClick={() => {
+          setSelection(i);
+          props.tester.addSel(props.test.id, option);
+        }}
+        key={i}
+      >
         {option}
       </button>
     ));
@@ -87,28 +129,6 @@ const Button = (props: ButtonProps) => {
       <>
         <p className="testStatement">{props.test.question}</p>
         {options}
-      </>
-    );
-  } else if (props.test.type === "boolean") {
-    return (
-      <>
-        <p className="testStatement">{props.test.question}</p>
-        <button
-          className="testOption"
-          onClick={() => {
-            props.tester.addSel(props.test.id, props.test.options[0]);
-          }}
-        >
-          {props.test.options[0]}
-        </button>
-        <button
-          className="testOption"
-          onClick={() => {
-            props.tester.addSel(props.test.id, props.test.options[1]);
-          }}
-        >
-          {props.test.options[1]}
-        </button>
       </>
     );
   } else {
