@@ -12,9 +12,10 @@ import { assert } from "console";
  * index 2: average of q3
  */
 export const generateDescriptor = (selections: string, userId: string): DescriptorInterface => {
-  console.log(selections);
-  console.log(selections.toString().replace(/'/g, '"').toString());
-  const selectionsJSON = JSON.parse(selections.toString().replace(/'/g, '"'));
+  /* Logging the selections to the console. */
+  // console.log(selections);
+  // console.log(selections.toString().replace(/'/g, '"').toString());
+  const selectionsJSON = {}; //JSON.parse(selections.toString().replace(/'/g, '"')) ||
   //iterate through the keys-value pairs
   const q1Answers: number[] = [];
   const q2Answers: number[] = [];

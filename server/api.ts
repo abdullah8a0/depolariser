@@ -46,7 +46,7 @@ router.post("/test", async (req, res) => {
 router.post("/results", async (req, res) => {
   // get the user's id
   const userID = req.user!._id;
-  // remove the quotes from the id
+  // remove the quotes from the i
 
   const descriptors = Descriptor.findOne({
     userId: userID,
