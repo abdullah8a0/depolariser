@@ -3,7 +3,8 @@ import auth from "./auth";
 import socketManager from "./server-socket";
 import Descriptor from "./models/Descriptor";
 import DescriptorInterface from "../shared/Descriptor";
-import { generateDescriptor } from "./placement_alg";
+import { generateDescriptor, fecthResults } from "./placement_alg";
+import { assert } from "console";
 const router = express.Router();
 
 router.post("/login", auth.login);
@@ -34,13 +35,34 @@ router.post("/initsocket", (req, res) => {
  * Generates the description vector from the user's selections
  * Saves the description vector to the database
  */
-router.post("/test", (req, res) => {
+router.post("/test", async (req, res) => {
   // display the request body
-  console.log(JSON.stringify(req.body));
-  const newDescriptor = generateDescriptor(req.body);
+  assert(req.user!._id === "63cb0ff63162746b869961ac", `User ID is ${req.user!._id}`);
+  const newDescriptor = generateDescriptor(req.body, req.user!._id);
   newDescriptor.save();
   res.send({});
   // Write to mongoDB
+});
+router.post("/results", async (req, res) => {
+  // get the user's id
+  const userID = req.user!._id;
+  // remove the quotes from the id
+
+  const descriptors = Descriptor.findOne({
+    userId: userID,
+  }).then((descriptor: DescriptorInterface | null | undefined) => {
+    if (descriptor === null || descriptor === undefined) {
+      // generate the descriptor from the request body
+      const newDescriptor = generateDescriptor(req.body.testObj, userID);
+      // save the descriptor to the database
+      return newDescriptor.save();
+    }
+    return descriptor;
+  });
+  // get the user's results
+  const results = fecthResults(await descriptors);
+  // send the results to the client
+  res.send({ results: results });
 });
 
 // anything else falls to this "not found" case

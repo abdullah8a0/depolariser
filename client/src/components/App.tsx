@@ -51,8 +51,8 @@ const App = () => {
   return (
     <Router>
       <Main path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-      <Test path="test" userId={userId} handleLogout={handleLogout} />
-      <Results path="results" userId={userId} handleLogout={handleLogout} />
+      <Test path="/test" userId={userId} handleLogout={handleLogout} />
+      <Results path="/results" userId={userId} handleLogout={handleLogout} />
       <NotFound default={true} />
     </Router>
   );

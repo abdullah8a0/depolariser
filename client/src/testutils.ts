@@ -35,7 +35,10 @@ export class TestObject implements TestInterface {
     }
   }
   send(): Promise<void> {
-    // sends the test object to the server using the fetch api
+    // sends the test object to the server using the fetch api also saves it to local storage
+
+    // save to local storage
+    localStorage.setItem("testObj", JSON.stringify(Object.fromEntries(this.options)));
 
     fetch("/api/test", {
       method: "POST",

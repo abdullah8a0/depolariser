@@ -3,7 +3,7 @@ import { CredentialResponse } from "@react-oauth/google";
 import { TestObject, SingleTest } from "../../testutils";
 
 import "./Test.css";
-import { RouteComponentProps, useLocation } from "@reach/router";
+import { Link, RouteComponentProps, useLocation } from "@reach/router";
 
 const displayTest = async (tester: TestObject) => {
   const tests = await tester.getTests().then((tests) => tests.map((test, i) => <Button test={test} tester={tester} key={i} />));
@@ -12,14 +12,15 @@ const displayTest = async (tester: TestObject) => {
     <>
       <p>Take the test</p>
       {tests}
-      <button
-        onClick={() => {
-          tester.send();
-          window.location.href = "/results";
-        }}
-      >
-        Submit
-      </button>
+      <Link to="/results">
+        <button
+          onClick={() => {
+            tester.send();
+          }}
+        >
+          Submit
+        </button>
+      </Link>
     </>
   );
 };
