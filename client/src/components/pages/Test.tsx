@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { CredentialResponse } from "@react-oauth/google";
 import { TestObject, SingleTest } from "../../testutils";
 
 import "./Test.css";
-import { Link, RouteComponentProps, useLocation } from "@reach/router";
+import { Link, RouteComponentProps } from "@reach/router";
 
 const displayTest = async (tester: TestObject) => {
   const tests = await tester.getTests().then((tests) => tests.map((test, i) => <Button test={test} tester={tester} key={i} />));
@@ -113,7 +112,10 @@ const Button = (props: ButtonProps) => {
       </>
     );
   } else if (props.test.type === "option") {
-    const options = props.test.options!.map((option, i) => (
+    if (props.test.options === undefined) {
+      return <></>;
+    }
+    const options = props.test.options.map((option, i) => (
       <button
         className="testOption"
         onClick={() => {

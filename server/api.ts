@@ -22,9 +22,6 @@ router.post("/initsocket", (req, res) => {
   }
   res.send({});
 });
-function isNull(el: unknown): el is null {
-  return el === null;
-}
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
@@ -37,7 +34,10 @@ function isNull(el: unknown): el is null {
  */
 router.post("/results", async (req, res) => {
   // get the user's id
-  const userId = req.user!._id;
+  if (!req.user) {
+    return res.status(401).send({ err: "Not logged in." });
+  }
+  const userId = req.user._id;
   console.log(`rescieved testObj from ${userId}: ${JSON.stringify(req.body.testObj)}`);
   console.log(`its type is ${typeof req.body.testObj}`);
 
