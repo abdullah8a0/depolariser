@@ -37,7 +37,31 @@ export const generateDescriptor = (selections: string, userId: string): Descript
 };
 
 export const fecthResults = (descriptor: DescriptorInterface): string => {
-  descriptor.DescVector[0];
-  descriptor.DescVector[1];
-  return "Commie";
+  const x = descriptor.DescVector[0]; //change x to an number
+  const y = descriptor.DescVector[1];
+  const cutOff = 2;
+
+  //based on question 1 and 2 returns place on scale
+  if (-cutOff < x && x < cutOff && y > cutOff) {
+    return "Paleolibertarian";
+  } else if (x > cutOff && y > cutOff) {
+    return "Paleoconservative";
+  } else if (x > cutOff && -cutOff < y && y < cutOff) {
+    return "Theoconservative";
+  } else if (x > cutOff && y < -cutOff) {
+    return "Neoconservative";
+  } else if (-cutOff < x && x < cutOff && y < -cutOff) {
+    return "Communitarian";
+  } else if (x < -cutOff && y < -cutOff) {
+    return "Progressive";
+  } else if (x < -cutOff && y < cutOff && y > -cutOff) {
+    return "Radical";
+  } else if (x < -cutOff && y > cutOff) {
+    return "Individualist";
+  } else {
+    return "Populist";
+  }
+
+  //based on question 3 writes your placement
+  console.log(descriptor.DescVector[3]);
 };
