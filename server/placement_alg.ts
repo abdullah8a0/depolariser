@@ -129,7 +129,7 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
   const x = descriptor.DescVector[0];
   const y = descriptor.DescVector[1];
   const q2 = descriptor.DescVector[2];
-  const q3 = descriptor.DescVector[3]; //assume q3 is a string
+  const q3 = descriptor.DescVector[3];
 
   const angle = Math.atan(y / x);
   const pi = Math.PI;
@@ -149,13 +149,13 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
     politicalType = 3;
   } else if ((5 * pi) / 8 <= angle && angle < (7 * pi) / 8) {
     politicalType = 4;
-  } else if ((7 * pi) / 8 <= angle && angle < (9 * pi) / 8) {
+  } else if ((7 * pi) / 8 <= angle && angle < (-7 * pi) / 8) {
     politicalType = 5;
-  } else if ((9 * pi) / 8 <= angle && angle < (11 * pi) / 8) {
+  } else if ((-7 * pi) / 8 <= angle && angle < (-5 * pi) / 8) {
     politicalType = 6;
-  } else if ((11 * pi) / 8 <= angle && angle < (13 * pi) / 8) {
+  } else if ((-5 * pi) / 8 <= angle && angle < (-3 * pi) / 8) {
     politicalType = 7;
-  } else if ((13 * pi) / 8 <= angle && angle < (15 * pi) / 8) {
+  } else if ((-3 * pi) / 8 <= angle && angle < -pi / 8) {
     politicalType = 8;
   } else {
     politicalType = 0;
@@ -178,8 +178,15 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
     politicalName = "Communitarian";
   } else if (politicalType == 8) {
     politicalName = "Neoconservative";
+  } else {
+    politicalName = "Populist";
   }
 
+  return politicalName;
+  console.log(politicalName);
+  console.log(q3);
+
+  /** 
   //check placement of political type with question 3
   if (q3 == politicalType) {
     return politicalName;
@@ -196,4 +203,6 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
       return "cannot figure out";
     }
   }
+  */
+  //return "nothing";
 };
