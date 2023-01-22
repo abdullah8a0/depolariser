@@ -16,7 +16,7 @@ export type SingleTest = {
 interface TestInterface {
   addSel(id: string, value: string): void;
   removeSel(id: string): void;
-  send(): Promise<void>;
+  save(): void;
   getTests(): Promise<Array<SingleTest>>;
 }
 
@@ -34,30 +34,30 @@ export class TestObject implements TestInterface {
       this.options.delete(id);
     }
   }
-  send(): Promise<void> {
+  save(): void {
     // sends the test object to the server using the fetch api also saves it to local storage
 
     // save to local storage
     localStorage.setItem("testObj", JSON.stringify(Object.fromEntries(this.options)));
 
-    fetch("/api/test", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(Object.fromEntries(this.options)),
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("success");
-          console.log(JSON.stringify(response.json()));
-        }
-      })
-      .catch((error) => {
-        // do something
-      });
+    // fetch("/api/test", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(Object.fromEntries(this.options)),
+    // })
+    //   .then((response) => {
+    //     if (response.status === 200) {
+    //       console.log("success");
+    //       console.log(JSON.stringify(response.json()));
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     // do something
+    //   });
 
-    return Promise.resolve();
+    return;
   }
 
   getTests(): Promise<SingleTest[]> {

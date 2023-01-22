@@ -15,7 +15,7 @@ const displayTest = async (tester: TestObject) => {
       <Link to="/results">
         <button
           onClick={() => {
-            tester.send();
+            tester.save();
           }}
         >
           Submit
@@ -105,7 +105,7 @@ const Button = (props: ButtonProps) => {
           className="testBool"
           onClick={() => {
             setSelection(1 - selection);
-            props.tester.addSel(props.test.id, selection.toString());
+            props.tester.addSel(props.test.id, (1 - selection).toString());
           }}
         >
           <p className="testStatement">{props.test.question}</p>

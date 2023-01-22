@@ -18,16 +18,14 @@ const verify = (token: string) => {
 };
 
 const getOrCreateUser = (user: TokenPayload) => {
-  return User.findOne({ googleid: user.sub }).then(
-    (existingUser: UserInterface | null | undefined) => {
-      if (existingUser !== null && existingUser !== undefined) return existingUser;
-      const newUser = new User({
-        name: user.name,
-        googleid: user.sub,
-      });
-      return newUser.save();
-    }
-  );
+  return User.findOne({ googleid: user.sub }).then((existingUser: UserInterface | null | undefined) => {
+    if (existingUser !== null && existingUser !== undefined) return existingUser;
+    const newUser = new User({
+      name: user.name,
+      googleid: user.sub,
+    });
+    return newUser.save();
+  });
 };
 
 const login = (req: Request, res: Response) => {
@@ -59,7 +57,6 @@ const populateCurrentUser = (req: Request, _res: Response, next: NextFunction) =
   next();
 };
 
-// We use any because
 const ensureLoggedIn = (req: Request, res: Response, next: NextFunction) => {
   if (!req.user) {
     return res.status(401).send({ err: "Not logged in." });
