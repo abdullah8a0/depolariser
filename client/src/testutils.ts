@@ -352,43 +352,71 @@ export class TestObject implements TestInterface {
         id: "2.1.1",
         question: "Government Size:",
         type: "option",
-        options: ["Government should encompass all economic activity to have absolute control over economy and society.", "Government services should be expanded to promote social and economic equality.", "Government services should be limited to maintain order and stability.", "Government should only fulfill the most necessary services such as national security.", "Government should be abolished."],
+        options: [
+          "Government should encompass all economic activity to have absolute control over economy and society.",
+          "Government services should be expanded to promote social and economic equality.",
+          "Government services should be limited to maintain order and stability.",
+          "Government should only fulfill the most necessary services such as national security.",
+          "Government should be abolished.",
+        ],
       },
       {
         id: "2.1.2",
         question: "Economic Policy (Business):",
         type: "option",
-        options: ["Business corporations abuse their market power, they should be restrained.", "Business corporations operate in a reasonable regulatory environment.", "Business corporations are subject to excessive regulation."],
+        options: [
+          "Business corporations abuse their market power, they should be restrained.",
+          "Business corporations operate in a reasonable regulatory environment.",
+          "Business corporations are subject to excessive regulation.",
+        ],
       },
       {
         id: "2.1.3",
         question: "Economic Policy (Taxation):",
         type: "option",
-        options: ["Taxes on the wealthy should be raised to fund programs that benefit the society as a whole", "Only the taxes on the wealthy should be lowered to support economic growth.", "Taxes should be lowered in general to support economic growth."],
+        options: [
+          "Taxes on the wealthy should be raised to fund programs that benefit the society as a whole",
+          "Only the taxes on the wealthy should be lowered to support economic growth.",
+          "Taxes should be lowered in general to support economic growth.",
+        ],
       },
       {
         id: "2.2.1",
         question: "Clean Energy:",
         type: "option",
-        options: ["Government should invest in clean energy research and development, and conduct policies to encourage the use of clean energy.", "The private sector, rather than the government, should lead the transition to clean energy with support from the government.", "People should be free to choose their energy source and the market forces should drive the transition to clean energy rather than government intervention."],
+        options: [
+          "Government should invest in clean energy research and development, and conduct policies to encourage the use of clean energy.",
+          "The private sector, rather than the government, should lead the transition to clean energy with support from the government.",
+          "People should be free to choose their energy source and the market forces should drive the transition to clean energy rather than government intervention.",
+        ],
       },
       {
         id: "2.2.2",
         question: "Racial Injustice:",
         type: "option",
-        options: ["Laws and institutions are fundamentally biased against some racial and ethnic groups and need to be completely changed.", "Laws and institutions result in certain inequities which can be alleviated by making necessary adjustments in the system.", "Little or nothing needs to be done against racial injustice."],
+        options: [
+          "Laws and institutions are fundamentally biased against some racial and ethnic groups and need to be completely changed.",
+          "Laws and institutions result in certain inequities which can be alleviated by making necessary adjustments in the system.",
+          "Little or nothing needs to be done against racial injustice.",
+        ],
       },
       {
         id: "2.2.3",
         question: "Abortion:",
         type: "option",
-        options: ["Women should have access to safe and legal abortion since it is essential for women's reproductive rights and autonomy.", "Abortion should be illegal or severely restricted because it is morally wrong and the government has an obligation to protect the unborn baby."],
+        options: [
+          "Women should have access to safe and legal abortion since it is essential for women's reproductive rights and autonomy.",
+          "Abortion should be illegal or severely restricted because it is morally wrong and the government has an obligation to protect the unborn baby.",
+        ],
       },
       {
         id: "2.2.4",
         question: "Immigration:",
         type: "option",
-        options: ["Immigration should be open and inclusive, and immigrants should have the same rights and opportunities as citizens.", "Immigration should be limited and that the government should have greater control over who is allowed to enter the country."],
+        options: [
+          "Immigration should be open and inclusive, and immigrants should have the same rights and opportunities as citizens.",
+          "Immigration should be limited and that the government should have greater control over who is allowed to enter the country.",
+        ],
       },
       {
         id: "3.1",
