@@ -118,7 +118,7 @@ const Button = (props: ButtonProps) => {
         className="testOption"
         onClick={() => {
           setSelection(i);
-          props.tester.addSel(props.test.id, option);
+          props.tester.addSel(props.test.id, i.toString());
         }}
         key={i}
       >
