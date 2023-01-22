@@ -80,6 +80,7 @@ const q22IdtoPoints = {
   "2.2.1": [-10, 0, 10],
   "2.2.2": [-10, 0, 10],
   "2.2.3": [-10, 10],
+  "2.2.4": [-10, 10],
 };
 const q3IdtoPoints = {
   "3.9": [0, 1, 2, 3, 4],
@@ -88,6 +89,7 @@ const q3IdtoPoints = {
 export const generateDescriptor = (selections: any, userId: string): DescriptorInterface => {
   const selectionsJSON = selections;
   //iterate through the keys-value pairs
+
   const q1Score: number[] = [];
   const q21Score: number[] = [];
   const q22Score: number[] = [];
@@ -105,22 +107,28 @@ export const generateDescriptor = (selections: any, userId: string): DescriptorI
       assert(false, `Key ${key} is not valid`);
     }
   }
+  const vector = [
+    q1Score.reduce((a, b) => a + b, 0) / Object.keys(q1IdtoPoints).length,
+    q21Score.reduce((a, b) => a + b, 0) / Object.keys(q21IdtoPoints).length,
+    q22Score.reduce((a, b) => a + b, 0) / Object.keys(q22IdtoPoints).length,
+    q3Score.reduce((a, b) => a + b, 0) / Object.keys(q3IdtoPoints).length,
+  ];
+
+  console.log(`Vector: ${vector}`);
   return new Descriptor({
     userId: userId,
-    DescVector: [
-      q1Score.reduce((a, b) => a + b, 0) / Object.keys(q1IdtoPoints).length,
-      q21Score.reduce((a, b) => a + b, 0) / q21Score.length,
-      q22Score.reduce((a, b) => a + b, 0) / q22Score.length,
-      q3Score.reduce((a, b) => a + b, 0) / q3Score.length,
-    ],
+    DescVector: vector,
   });
 };
 
 export const fecthResults = (descriptor: DescriptorInterface): string => {
+  console.log(`Descriptor: ${descriptor.userId} ${descriptor.DescVector}`);
   const x = descriptor.DescVector[0]; //change x to an number
   const y = descriptor.DescVector[1];
-  const cutOff = 2;
+  const cutOff = 5;
 
+  console.log(x, y);
+  console.log(descriptor.DescVector[3]);
   //based on question 1 and 2 returns place on scale
   if (-cutOff < x && x < cutOff && y > cutOff) {
     return "Paleolibertarian";
@@ -143,5 +151,4 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
   }
 
   //based on question 3 writes your placement
-  console.log(descriptor.DescVector[3]);
 };

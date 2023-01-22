@@ -37,7 +37,6 @@ router.post("/initsocket", (req, res) => {
  */
 router.post("/test", async (req, res) => {
   // display the request body
-  assert(req.user!._id === "63cb0ff63162746b869961ac", `User ID is ${req.user!._id}`);
   const newDescriptor = generateDescriptor(req.body, req.user!._id);
   newDescriptor.save();
   res.send({});
