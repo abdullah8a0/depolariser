@@ -72,9 +72,9 @@ const q1IdtoPoints = {
   "1.57": [0, 10],
 };
 const q21IdtoPoints = {
-  "2.1.1": [-20, -10, 0, 10, 20],
-  "2.1.2": [-10, 0, 10],
-  "2.1.3": [-10, 0, 10],
+  "2.1.1": [-10, -5, 0, 5, 10],
+  "2.1.2": [-5, 0, 5],
+  "2.1.3": [-5, 0, 5],
 };
 const q22IdtoPoints = {
   "2.2.1": [-10, 0, 10],
@@ -107,12 +107,7 @@ export const generateDescriptor = (selections: any, userId: string): DescriptorI
       assert(false, `Key ${key} is not valid`);
     }
   }
-  const vector = [
-    q1Score.reduce((a, b) => a + b, 0) / Object.keys(q1IdtoPoints).length,
-    q21Score.reduce((a, b) => a + b, 0) / Object.keys(q21IdtoPoints).length,
-    q22Score.reduce((a, b) => a + b, 0) / Object.keys(q22IdtoPoints).length,
-    q3Score.reduce((a, b) => a + b, 0) / Object.keys(q3IdtoPoints).length,
-  ];
+  const vector = [q1Score.reduce((a, b) => a + b, 0) / Object.keys(q1IdtoPoints).length, q21Score.reduce((a, b) => a + b, 0) / Object.keys(q21IdtoPoints).length, q22Score.reduce((a, b) => a + b, 0) / Object.keys(q22IdtoPoints).length, q3Score.reduce((a, b) => a + b, 0) / Object.keys(q3IdtoPoints).length];
 
   console.log(`Vector: ${vector}`);
   return new Descriptor({
@@ -123,32 +118,74 @@ export const generateDescriptor = (selections: any, userId: string): DescriptorI
 
 export const fecthResults = (descriptor: DescriptorInterface): string => {
   console.log(`Descriptor: ${descriptor.userId} ${descriptor.DescVector}`);
-  const x = descriptor.DescVector[0]; //change x to an number
+  const x = descriptor.DescVector[0];
   const y = descriptor.DescVector[1];
-  const cutOff = 5;
+  const q2 = descriptor.DescVector[2];
+  const q3 = descriptor.DescVector[3]; //assume q3 is a string
+
+  const angle = Math.atan(y / x);
+  const pi = Math.PI;
+
+  var politicalType;
+  var politicalName;
 
   console.log(x, y);
   console.log(descriptor.DescVector[3]);
-  //based on question 1 and 2 returns place on scale
-  if (-cutOff < x && x < cutOff && y > cutOff) {
-    return "Paleolibertarian";
-  } else if (x > cutOff && y > cutOff) {
-    return "Paleoconservative";
-  } else if (x > cutOff && -cutOff < y && y < cutOff) {
-    return "Theoconservative";
-  } else if (x > cutOff && y < -cutOff) {
-    return "Neoconservative";
-  } else if (-cutOff < x && x < cutOff && y < -cutOff) {
-    return "Communitarian";
-  } else if (x < -cutOff && y < -cutOff) {
-    return "Progressive";
-  } else if (x < -cutOff && y < cutOff && y > -cutOff) {
-    return "Radical";
-  } else if (x < -cutOff && y > cutOff) {
-    return "Individualist";
+
+  //based on question 1 and 2 political type is selected
+  if (-pi / 8 < angle && angle < pi / 8) {
+    politicalType = 1;
+  } else if (pi / 8 <= angle && angle < (3 * pi) / 8) {
+    politicalType = 2;
+  } else if ((3 * pi) / 8 <= angle && angle < (5 * pi) / 8) {
+    politicalType = 3;
+  } else if ((5 * pi) / 8 <= angle && angle < (7 * pi) / 8) {
+    politicalType = 4;
+  } else if ((7 * pi) / 8 <= angle && angle < (9 * pi) / 8) {
+    politicalType = 5;
+  } else if ((9 * pi) / 8 <= angle && angle < (11 * pi) / 8) {
+    politicalType = 6;
+  } else if ((11 * pi) / 8 <= angle && angle < (13 * pi) / 8) {
+    politicalType = 7;
+  } else if ((13 * pi) / 8 <= angle && angle < (15 * pi) / 8) {
+    politicalType = 8;
   } else {
-    return "Populist";
+    politicalType = 0;
   }
 
-  //based on question 3 writes your placement
+  // map the nummber to the name
+  if (politicalType == 1) {
+    politicalName = "Theoconservative";
+  } else if (politicalType == 2) {
+    politicalName = "Paleoconservative";
+  } else if (politicalType == 3) {
+    politicalName = "Paleolibertarian";
+  } else if (politicalType == 4) {
+    politicalName = "Individualist";
+  } else if (politicalType == 5) {
+    politicalName = "Radical";
+  } else if (politicalType == 6) {
+    politicalName = "Progressive";
+  } else if (politicalType == 7) {
+    politicalName = "Communitarian";
+  } else if (politicalType == 8) {
+    politicalName = "Neoconservative";
+  }
+
+  //check placement of political type with question 3
+  if (q3 == politicalType) {
+    return politicalName;
+  } else if (politicalType != 1 && politicalType != 8) {
+    if (politicalType + 1 == q3 || politicalType - 1 == q3) {
+      return politicalName;
+    } else {
+      return "cannot figure out";
+    }
+  } else if (politicalType == 1) {
+    if (politicalType + 1 == q3 || q3 == 8) {
+      return politicalName;
+    } else {
+      return "cannot figure out";
+    }
+  }
 };
