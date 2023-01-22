@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { CredentialResponse } from "@react-oauth/google";
 import { post } from "../../utilities";
 
 import "./Results.css";
-import { RouteComponentProps, useLocation } from "@reach/router";
+import { RouteComponentProps } from "@reach/router";
 
 const displayResult = async (userId: string) => {
   // fecth the results from the server with params = userId and testObj from local storage

@@ -12,10 +12,6 @@ import { assert } from "console";
  * index 2: average of q3
  */
 
-function isObj(el: unknown): el is object {
-  return typeof el === "object";
-}
-
 const q1IdtoPoints = {
   "1.1": [0, -10],
   "1.2": [0, -20],
@@ -91,7 +87,11 @@ const q3IdtoPoints = {
 };
 
 export const generateDescriptor = (selections: unknown, userId: string): DescriptorInterface => {
-  if (!isObj(selections)) {
+  if (
+    !((el): el is object => {
+      return typeof el === "object";
+    })(selections)
+  ) {
     throw new Error("selections is not an object");
   }
   const selectionsJSON = selections;

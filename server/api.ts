@@ -2,9 +2,7 @@ import express from "express";
 import auth from "./auth";
 import socketManager from "./server-socket";
 import Descriptor from "./models/Descriptor";
-import DescriptorInterface from "../shared/Descriptor";
 import { generateDescriptor, fecthResults } from "./placement_alg";
-import { assert } from "console";
 const router = express.Router();
 
 router.post("/login", auth.login);
@@ -52,14 +50,10 @@ router.post("/results", async (req, res) => {
     { upsert: true, new: true, setDefaultsOnInsert: true }
   );
 
-  if (!isNull(descriptors)) {
-    // get the user's results
-    const results = fecthResults(descriptors);
-    // send the results to the client
-    res.send({ results: results });
-    return;
-  }
-  res.status(500).send({ msg: "Error: could not save descriptor" });
+  // get the user's results
+  const results = fecthResults(descriptors);
+  // send the results tso the client
+  res.send({ results: results });
   return;
 });
 
