@@ -24,7 +24,9 @@ router.post("/initsocket", (req, res) => {
   }
   res.send({});
 });
-
+function isNull(el: unknown): el is null {
+  return el === null;
+}
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
@@ -35,33 +37,30 @@ router.post("/initsocket", (req, res) => {
  * Generates the description vector from the user's selections
  * Saves the description vector to the database
  */
-router.post("/test", async (req, res) => {
-  // display the request body
-  const newDescriptor = generateDescriptor(req.body, req.user!._id);
-  newDescriptor.save();
-  res.send({});
-  // Write to mongoDB
-});
 router.post("/results", async (req, res) => {
   // get the user's id
-  const userID = req.user!._id;
-  // remove the quotes from the id
+  const userId = req.user!._id;
+  console.log(`rescieved testObj from ${userId}: ${JSON.stringify(req.body.testObj)}`);
+  console.log(`its type is ${typeof req.body.testObj}`);
 
-  const descriptors = Descriptor.findOne({
-    userId: userID,
-  }).then((descriptor: DescriptorInterface | null | undefined) => {
-    if (descriptor === null || descriptor === undefined) {
-      // generate the descriptor from the request body
-      const newDescriptor = generateDescriptor(req.body.testObj, userID);
-      // save the descriptor to the database
-      return newDescriptor.save();
-    }
-    return descriptor;
-  });
-  // get the user's results
-  const results = fecthResults(await descriptors);
-  // send the results to the client
-  res.send({ results: results });
+  // generate the descriptor from the request body
+  const newDescriptor = generateDescriptor(JSON.parse(req.body.testObj), userId);
+
+  const descriptors = await Descriptor.findOneAndReplace(
+    { userId: userId },
+    { userId: userId, DescVector: newDescriptor.DescVector },
+    { upsert: true, new: true, setDefaultsOnInsert: true }
+  );
+
+  if (!isNull(descriptors)) {
+    // get the user's results
+    const results = fecthResults(descriptors);
+    // send the results to the client
+    res.send({ results: results });
+    return;
+  }
+  res.status(500).send({ msg: "Error: could not save descriptor" });
+  return;
 });
 
 // anything else falls to this "not found" case

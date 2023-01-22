@@ -12,6 +12,10 @@ import { assert } from "console";
  * index 2: average of q3
  */
 
+function isObj(el: unknown): el is object {
+  return typeof el === "object";
+}
+
 const q1IdtoPoints = {
   "1.1": [0, -10],
   "1.2": [0, -20],
@@ -86,9 +90,13 @@ const q3IdtoPoints = {
   "3.9": [0, 1, 2, 3, 4],
 };
 
-export const generateDescriptor = (selections: any, userId: string): DescriptorInterface => {
+export const generateDescriptor = (selections: unknown, userId: string): DescriptorInterface => {
+  if (!isObj(selections)) {
+    throw new Error("selections is not an object");
+  }
   const selectionsJSON = selections;
   //iterate through the keys-value pairs
+  console.log(`selectionsJSON: ${JSON.stringify(selectionsJSON)}`);
 
   const q1Score: number[] = [];
   const q21Score: number[] = [];
