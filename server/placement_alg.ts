@@ -115,7 +115,12 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
       assert(false, `Key ${key} is not valid`);
     }
   }
-  const vector = [q1Score.reduce((a, b) => a + b, 0) / Object.keys(q1IdtoPoints).length, q21Score.reduce((a, b) => a + b, 0) / Object.keys(q21IdtoPoints).length, q22Score.reduce((a, b) => a + b, 0) / Object.keys(q22IdtoPoints).length, q3Score.reduce((a, b) => a + b, 0) / Object.keys(q3IdtoPoints).length];
+  const vector = [
+    q1Score.reduce((a, b) => a + b, 0) / Math.max(q1Score.length, 1),
+    q21Score.reduce((a, b) => a + b, 0),
+    q22Score.reduce((a, b) => a + b, 0),
+    q3Score.reduce((a, b) => a + b, 0) / Object.keys(q3IdtoPoints).length,
+  ];
 
   console.log(`Vector: ${vector}`);
   return new Descriptor({
@@ -131,7 +136,7 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
   const q2 = descriptor.DescVector[2];
   const q3 = descriptor.DescVector[3];
 
-  const angle = Math.atan(y / x);
+  const angle = Math.atan2(y, x);
   const pi = Math.PI;
 
   var politicalType;
