@@ -2,6 +2,7 @@ import React from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout, CredentialResponse } from "@react-oauth/google";
 
 import "./Main.css";
+import "../../utilities.css";
 import { Link, RouteComponentProps } from "@reach/router";
 
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
@@ -34,6 +35,10 @@ const Main = (props: Props) => {
           <GoogleLogin onSuccess={handleLogin} onError={() => console.log("Error Logging in")} />
         )}
 
+        <head>
+          <title>Depolarizer</title>
+        </head>
+
         {props.userId ? (
           <>
             <p> Take the test</p>
@@ -43,28 +48,27 @@ const Main = (props: Props) => {
           </>
         ) : (
           <>
-            <head>
-              <title>Depolarizer</title>
-            </head>
-            <body>
-              <h1>Depolarizer</h1>
-              <section>
-                <h2>Mission</h2>
+            <body className="background">
+              <h1 className="u-textCenter font">Depolarizer</h1>
+              <section className="missionBox">
                 <h3>
                   Our mission is to assess your political views through a test and provide a platform for you to access news sources that present
                   opposing viewpoints, fostering critical thinking and informed discourse.
                 </h3>
               </section>
-              <section>
-                <h3>Learn More</h3>
-                <Link to="/learnmore">
-                  <button>Learn More</button>
-                </Link>
-
-                <h3>Take Test</h3>
-                <Link to="/test">
-                  <button>Test</button>
-                </Link>
+              <section className="column">
+                <div className="leftColumn">
+                  <h4>To read more about our test and how our algorithm works press learn more.</h4>
+                  <Link to="/learnmore">
+                    <button className="button">LEARN MORE</button>
+                  </Link>
+                </div>
+                <div className="rightColumn">
+                  <h4>In order to figure out your political type take the test.</h4>
+                  <Link to="/test">
+                    <button className="button">TAKE TEST</button>
+                  </Link>
+                </div>
               </section>
             </body>
           </>
