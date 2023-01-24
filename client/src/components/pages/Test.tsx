@@ -9,7 +9,11 @@ const displayTest = async (tester: TestObject) => {
 
   return (
     <>
+      <Link to="/">
+        <button>Home</button>
+      </Link>
       <p>Take the test</p>
+      <p>Select which news sources do you usually read</p>
       {tests}
       <Link to="/results">
         <button
@@ -76,7 +80,7 @@ type ButtonProps = RouteComponentProps & {
   tester: TestObject;
 };
 const Button = (props: ButtonProps) => {
-  const [selection, setSelection] = useState<number>(0);
+  const [selection, setSelection] = useState<number>(-1);
   if (props.test.type === "scale") {
     const slider = (
       <>
@@ -100,13 +104,15 @@ const Button = (props: ButtonProps) => {
       </>
     );
   } else if (props.test.type === "bool") {
+    /* toggle opacity of div.testBool on clicking*/
     return (
       <>
         <button
           className="testBool"
+          data-selected={selection}
           onClick={() => {
-            setSelection(1 - selection);
-            props.tester.addSel(props.test.id, (1 - selection).toString());
+            setSelection(-1 * selection);
+            props.tester.addSel(props.test.id, (selection === -1 ? 0 : 1).toString());
           }}
         >
           <p className="testStatement">{props.test.question}</p>
@@ -120,6 +126,7 @@ const Button = (props: ButtonProps) => {
     const options = props.test.options.map((option, i) => (
       <button
         className="testOption"
+        data-selected={selection === i}
         onClick={() => {
           setSelection(i);
           props.tester.addSel(props.test.id, i.toString());

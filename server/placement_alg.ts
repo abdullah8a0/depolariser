@@ -2,6 +2,8 @@ import Descriptor from "./models/Descriptor";
 import DescriptorInterface from "../shared/Descriptor";
 import { assert } from "console";
 import { parseCNN, parseFOX, InfoCard } from "./scrape";
+import Card from "./models/Card";
+import CardInterface from "../shared/Card";
 
 /* A function that takes in a string and a userId and returns a DescriptorInterface.
  * The string is the user's selections from the test.
@@ -138,8 +140,29 @@ type PolInfo = {
   politicalDescription: string;
 };
 
+/**
+ * It takes in a user's political placement and returns a list of news articles that are relevant to
+ * the user's political placement.
+ * Looks up today's news articles from the database. If there are no articles, it scrapes the news.
+ *
+ * @param {PolInfo} userPlacement - PolInfo
+ * @returns An array of InfoCard objects
+ */
 const generateSuggestions = async (userPlacement: PolInfo): Promise<InfoCard[]> => {
-  return userPlacement.wing == "left" ? await parseFOX("politics") : await parseCNN("politics");
+  const today = new Date();
+  const todayString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+  const card = await Card.findOne({ date: todayString });
+  if (card) {
+    return userPlacement.wing == "left" ? card.FOXCards : card.CNNCards;
+  } else {
+    const newCard = new Card({
+      date: todayString,
+      CNNCards: await parseCNN("politics"),
+      FOXCards: await parseFOX("politics"),
+    });
+    await newCard.save();
+    return userPlacement.wing == "left" ? newCard.FOXCards : newCard.CNNCards;
+  }
 };
 
 export const fecthResults = async (descriptor: DescriptorInterface): Promise<any> => {

@@ -1,0 +1,21 @@
+/* toggle opacity and make font bold of div.testBool on clicking*/
+
+.testBool,
+.testOption {
+  opacity: 0.6;
+}
+
+.testBool:hover,
+.testOption:hover {
+  opacity: 1;
+}
+
+[data-selected="1"] {
+  opacity: 1;
+  font-weight: bold;
+}
+
+[data-selected="true"] {
+  opacity: 1;
+  font-weight: bold;
+}

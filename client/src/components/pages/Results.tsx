@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { post } from "../../utilities";
 
 import "./Results.css";
-import { RouteComponentProps } from "@reach/router";
+import { RouteComponentProps, Link } from "@reach/router";
 
 const displayResult = async (userId: string) => {
   // fecth the results from the server with params = userId and testObj from local storage
 
   const testObj = localStorage.getItem("testObj");
   if (!testObj) {
+    alert("You must take the test before viewing the results");
     window.location.href = "/";
     return <></>;
   }
@@ -62,6 +63,9 @@ const Results = (props: Props) => {
 
   return (
     <>
+      <Link to="/">
+        <button>Home</button>
+      </Link>
       <p>This is the results page!</p>
       <button
         onClick={() => {
