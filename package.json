@@ -5,7 +5,8 @@
   "scripts": {
     "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5050",
     "start": "TS_NODE_PROJECT='./tsconfig.json' nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/server.ts",
-    "build": "webpack --config ./webpack.config.js --mode production"
+    "build": "webpack --config ./webpack.config.js --mode production",
+    "lint": "eslint --ext .ts,.tsx --fix client/src server shared"
   },
   "author": "johanc",
   "license": "MIT",
@@ -39,6 +40,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "google-auth-library": "^6.1.4",
+    "jsdom": "^21.1.0",
     "jwt-decode": "^3.1.2",
     "mongoose": "^5.11.11",
     "morgan": "^1.10.0",
