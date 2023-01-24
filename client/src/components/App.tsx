@@ -7,6 +7,8 @@ import { get, post } from "../utilities";
 import NotFound from "./pages/NotFound";
 import Main from "./pages/Main";
 import Test from "./pages/Test";
+import LearnMore from "./pages/LearnMore";
+
 import { socket } from "../client-socket";
 import User from "../../../shared/User";
 import "../utilities.css";
@@ -53,6 +55,7 @@ const App = () => {
       <Main path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Test path="/test" userId={userId} handleLogout={handleLogout} />
       <Results path="/results" userId={userId} handleLogout={handleLogout} />
+      <LearnMore path="/learnmore" userId={userId} handleLogout={handleLogout} />
       <NotFound default={true} />
     </Router>
   );
