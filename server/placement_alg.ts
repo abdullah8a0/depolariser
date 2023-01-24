@@ -139,8 +139,8 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
   const angle = Math.atan2(y, x);
   const pi = Math.PI;
 
-  var politicalType;
-  var politicalName;
+  let politicalType;
+  let politicalName;
 
   console.log(x, y);
   console.log(descriptor.DescVector[3]);
@@ -188,8 +188,6 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
   }
 
   return politicalName;
-  console.log(politicalName);
-  console.log(q3);
 
   /** 
   //check placement of political type with question 3

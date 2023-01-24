@@ -9,6 +9,7 @@ const displayResult = async (userId: string) => {
 
   const testObj = localStorage.getItem("testObj");
   if (!testObj) {
+    window.location.href = "/";
     return <></>;
   }
   const serverData = await post("/api/results", { userId: userId, testObj: testObj }).then((res) => {

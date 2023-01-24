@@ -40,28 +40,10 @@ export class TestObject implements TestInterface {
     // save to local storage
     localStorage.setItem("testObj", JSON.stringify(Object.fromEntries(this.options)));
 
-    // fetch("/api/test", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(Object.fromEntries(this.options)),
-    // })
-    //   .then((response) => {
-    //     if (response.status === 200) {
-    //       console.log("success");
-    //       console.log(JSON.stringify(response.json()));
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     // do something
-    //   });
-
     return;
   }
 
   getTests(): Promise<SingleTest[]> {
-    // for now return 2 tests with 2 options each
     const tests: SingleTest[] = [
       {
         id: "1.1",

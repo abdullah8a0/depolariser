@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  GoogleOAuthProvider,
-  GoogleLogin,
-  googleLogout,
-  CredentialResponse,
-} from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleLogin, googleLogout, CredentialResponse } from "@react-oauth/google";
 
 import "./Main.css";
 import { Link, RouteComponentProps } from "@reach/router";
 
-//TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "926449838822-o9nmpi2dtrcuge8rkso0sti3vm5ln10d.apps.googleusercontent.com";
 
 type Props = RouteComponentProps & {

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import auth from "./auth";
 import socketManager from "./server-socket";
 import Descriptor from "./models/Descriptor";
@@ -7,14 +7,14 @@ const router = express.Router();
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
-router.get("/whoami", (req, res) => {
+router.get("/whoami", (req: Request, res: Response) => {
   if (!req.user) {
     // Not logged in.
     return res.send({});
   }
   res.send(req.user);
 });
-router.post("/initsocket", (req, res) => {
+router.post("/initsocket", (req: Request, res: Response) => {
   // do nothing if user not logged in
   if (req.user) {
     const socket = socketManager.getSocketFromSocketID(req.body.socketid);
@@ -22,17 +22,7 @@ router.post("/initsocket", (req, res) => {
   }
   res.send({});
 });
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
-/**
- * @api {post} /api/test Test API
- * @apiName Test
- *
- * Generates the description vector from the user's selections
- * Saves the description vector to the database
- */
-router.post("/results", async (req, res) => {
+router.post("/results", async (req: Request, res: Response) => {
   // get the user's id
   if (!req.user) {
     return res.status(401).send({ err: "Not logged in." });
@@ -58,7 +48,7 @@ router.post("/results", async (req, res) => {
 });
 
 // anything else falls to this "not found" case
-router.all("*", (req, res) => {
+router.all("*", (req: Request, res: Response) => {
   const msg = `Api route not found: ${req.method} ${req.url}`;
   res.status(404).send({ msg });
 });

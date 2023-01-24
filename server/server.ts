@@ -11,10 +11,12 @@ import api from "./api";
 // Loads environmental variables
 dotenv.config({});
 
+interface ResponseError extends Error {
+  status?: number;
+}
+
 // Server configuration below
-// TODO change connection URL after setting up your team database and creating the .env file
 const mongoConnectionURL = process.env.MONGO_SRV;
-// TODO change database name to the name you chose
 const databaseName = "Cluster0";
 
 if (mongoConnectionURL === undefined) {
@@ -56,12 +58,11 @@ app.use(express.static(reactPath));
 // Fallbacks
 
 // for all other routes, render index.html and let react router handle it
-app.get("*", (req, res) => {
+app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(reactPath, "index.html"));
 });
 
-// Optional TODO (on your own) - Add an error interface.
-app.use((err: any, _req: Request, res: Response) => {
+app.use((err: ResponseError, _req: Request, res: Response) => {
   const status = err.status || 500;
   if (status === 500) {
     // 500 means Internal Server Error

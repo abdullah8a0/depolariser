@@ -14,16 +14,16 @@ const formatParams = (params: object) => {
     .join("&");
 };
 
-const convertToJSON = (res: any) => {
+const convertToJSON = (res: globalThis.Response) => {
   if (!res.ok) {
     throw `API request failed with response status ${res.status} and text: ${res.statusText}`;
   }
   return res
     .clone() // clone so that the original is still readable for debugging
     .json() // start converting to JSON object
-    .catch((error) => {
+    .catch((_) => {
       // throw an error containing the text that couldn't be converted to JSON
-      return res.text().then((text) => {
+      return res.text().then((text: string) => {
         throw `API request's result could not be converted to a JSON object: \n${text}`;
       });
     });

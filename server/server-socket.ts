@@ -14,7 +14,6 @@ export const addUser = (user: User, socket: Socket): void => {
   const oldSocket = userToSocketMap.get(user._id);
   if (oldSocket && oldSocket.id !== socket.id) {
     // there was an old tab open for this user, force it to disconnect
-    // TODO(weblab student): is this the behavior you want?
     oldSocket.disconnect();
     socketToUserMap.delete(oldSocket.id);
   }
