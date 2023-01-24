@@ -29,11 +29,13 @@ type TestProps = RouteComponentProps & {
   userId?: string;
   handleLogout: () => void;
 };
+
 const Test = (props: TestProps) => {
   const { userId, handleLogout } = props;
 
   useEffect(() => {
     if (!userId) {
+      alert("You must be logged in to view this page");
       window.location.href = "/";
     }
   }, [userId]);

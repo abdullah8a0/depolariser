@@ -43,6 +43,7 @@ const Results = (props: Props) => {
   const { userId, handleLogout } = props;
   useEffect(() => {
     if (!userId) {
+      alert("You must be logged in to view this page");
       window.location.href = "/";
     }
   }, [userId]);
