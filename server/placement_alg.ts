@@ -1,7 +1,8 @@
 import Descriptor from "./models/Descriptor";
 import DescriptorInterface from "../shared/Descriptor";
 import { assert } from "console";
-import { parseCNN, parseFOX } from "./scrape";
+import { parseCNN, parseFOX, InfoCard } from "./scrape";
+
 /* A function that takes in a string and a userId and returns a DescriptorInterface.
  * The string is the user's selections from the test.
  * The userId is the user's id.
@@ -137,7 +138,11 @@ type PolInfo = {
   politicalDescription: string;
 };
 
-export const fecthResults = async (descriptor: DescriptorInterface): Promise<string> => {
+const generateSuggestions = async (userPlacement: PolInfo): Promise<InfoCard[]> => {
+  return userPlacement.wing == "left" ? await parseFOX("politics") : await parseCNN("politics");
+};
+
+export const fecthResults = async (descriptor: DescriptorInterface): Promise<any> => {
   const x = descriptor.DescVector[0];
   const y = descriptor.DescVector[1];
   const q2 = descriptor.DescVector[2];
@@ -180,33 +185,34 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<str
   // map the nummber to the name
   if (userPlacement.politicalType == 1) {
     userPlacement.politicalName = "Theoconservative";
+    userPlacement.wing = "right";
   } else if (userPlacement.politicalType == 2) {
     userPlacement.politicalName = "Paleoconservative";
+    userPlacement.wing = "right";
   } else if (userPlacement.politicalType == 3) {
     userPlacement.politicalName = "Paleolibertarian";
+    userPlacement.wing = "right";
   } else if (userPlacement.politicalType == 4) {
     userPlacement.politicalName = "Individualist";
+    userPlacement.wing = "right";
   } else if (userPlacement.politicalType == 5) {
     userPlacement.politicalName = "Radical";
+    userPlacement.wing = "left";
   } else if (userPlacement.politicalType == 6) {
     userPlacement.politicalName = "Progressive";
+    userPlacement.wing = "left";
   } else if (userPlacement.politicalType == 7) {
     userPlacement.politicalName = "Communitarian";
+    userPlacement.wing = "left";
   } else if (userPlacement.politicalType == 8) {
     userPlacement.politicalName = "Neoconservative";
+    userPlacement.wing = "right";
   } else {
     userPlacement.politicalName = "Populist";
+    userPlacement.wing = "right";
   }
-
-  return `
-      <h1>Results</h1>
-      <p>Based on your answers, you are a ${userPlacement.politicalName}.</p>
-      <p>Here are some news sources that you might read to learn more about what other people think.</p>
-      <ul>
-        ${(userPlacement.wing == "left" ? await parseCNN("politics") : await parseFOX("politics")).map((article) => {
-          return `<li><a href="${article}">${article}</a></li>`;
-        })}
-      </ul>
-
-  `;
+  return {
+    politicalName: userPlacement.politicalName,
+    suggestions: await generateSuggestions(userPlacement),
+  };
 };

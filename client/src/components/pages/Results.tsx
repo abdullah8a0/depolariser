@@ -13,7 +13,21 @@ const displayResult = async (userId: string) => {
     return <></>;
   }
   const serverData = await post("/api/results", { userId: userId, testObj: testObj }).then((res) => {
-    return <div dangerouslySetInnerHTML={{ __html: res.results }}></div>;
+    return (
+      <>
+        <h1>Results</h1>
+        <p>Based on your answers, you are a {res.results.politicalName}.</p>
+        <p>Here are some news sources that you might read to learn more about what other people think.</p>
+        <ul>
+          {res.results.suggestions.map((suggestion) => (
+            <li>
+              <img src={suggestion.img} />
+              <a href={suggestion.url}>{suggestion.title}</a>
+            </li>
+          ))}
+        </ul>
+      </>
+    );
   });
 
   // return the results
