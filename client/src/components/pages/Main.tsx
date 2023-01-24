@@ -5,6 +5,8 @@ import "./Main.css";
 import "../../utilities.css";
 import { Link, RouteComponentProps } from "@reach/router";
 
+import LearnMore from "./LearnMore";
+
 //TODO(weblab student): REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "926449838822-o9nmpi2dtrcuge8rkso0sti3vm5ln10d.apps.googleusercontent.com";
 
@@ -57,13 +59,13 @@ const Main = (props: Props) => {
                 </h3>
               </section>
               <section className="column">
-                <div className="leftColumn">
+                <div className="smallColumn">
                   <h4>To read more about our test and how our algorithm works press learn more.</h4>
                   <Link to="/learnmore">
                     <button className="button">LEARN MORE</button>
                   </Link>
                 </div>
-                <div className="rightColumn">
+                <div className="smallColumn">
                   <h4>In order to figure out your political type take the test.</h4>
                   <Link to="/test">
                     <button className="button">TAKE TEST</button>

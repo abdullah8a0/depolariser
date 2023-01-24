@@ -17,16 +17,7 @@
   align-items: center;
 }
 
-.leftColumn {
-  background-color: #fc7753;
-  padding: 8px;
-  margin: 16px;
-  flex: 1;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.rightColumn {
+.smallColumn {
   background-color: #fc7753;
   padding: 8px;
   margin: 16px;
