@@ -1,6 +1,7 @@
 import Descriptor from "./models/Descriptor";
 import DescriptorInterface from "../shared/Descriptor";
 import { assert } from "console";
+import { parseCNN, parseFOX } from "./scrape";
 /* A function that takes in a string and a userId and returns a DescriptorInterface.
  * The string is the user's selections from the test.
  * The userId is the user's id.
@@ -129,8 +130,14 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
   });
 };
 
-export const fecthResults = (descriptor: DescriptorInterface): string => {
-  console.log(`Descriptor: ${descriptor.userId} ${descriptor.DescVector}`);
+type PolInfo = {
+  politicalType: number;
+  politicalName: string;
+  wing: "left" | "right";
+  politicalDescription: string;
+};
+
+export const fecthResults = async (descriptor: DescriptorInterface): Promise<string> => {
   const x = descriptor.DescVector[0];
   const y = descriptor.DescVector[1];
   const q2 = descriptor.DescVector[2];
@@ -139,73 +146,67 @@ export const fecthResults = (descriptor: DescriptorInterface): string => {
   const angle = Math.atan2(y, x);
   const pi = Math.PI;
 
-  let politicalType;
-  let politicalName;
+  const userPlacement: PolInfo = {
+    politicalType: 0,
+    politicalName: "",
+    wing: "left",
+    politicalDescription: "",
+  };
 
   console.log(x, y);
   console.log(descriptor.DescVector[3]);
 
   //based on question 1 and 2 political type is selected
   if (-pi / 8 < angle && angle < pi / 8) {
-    politicalType = 1;
+    userPlacement.politicalType = 1;
   } else if (pi / 8 <= angle && angle < (3 * pi) / 8) {
-    politicalType = 2;
+    userPlacement.politicalType = 2;
   } else if ((3 * pi) / 8 <= angle && angle < (5 * pi) / 8) {
-    politicalType = 3;
+    userPlacement.politicalType = 3;
   } else if ((5 * pi) / 8 <= angle && angle < (7 * pi) / 8) {
-    politicalType = 4;
+    userPlacement.politicalType = 4;
   } else if ((7 * pi) / 8 <= angle && angle < (-7 * pi) / 8) {
-    politicalType = 5;
+    userPlacement.politicalType = 5;
   } else if ((-7 * pi) / 8 <= angle && angle < (-5 * pi) / 8) {
-    politicalType = 6;
+    userPlacement.politicalType = 6;
   } else if ((-5 * pi) / 8 <= angle && angle < (-3 * pi) / 8) {
-    politicalType = 7;
+    userPlacement.politicalType = 7;
   } else if ((-3 * pi) / 8 <= angle && angle < -pi / 8) {
-    politicalType = 8;
+    userPlacement.politicalType = 8;
   } else {
-    politicalType = 0;
+    userPlacement.politicalType = 0;
   }
 
   // map the nummber to the name
-  if (politicalType == 1) {
-    politicalName = "Theoconservative";
-  } else if (politicalType == 2) {
-    politicalName = "Paleoconservative";
-  } else if (politicalType == 3) {
-    politicalName = "Paleolibertarian";
-  } else if (politicalType == 4) {
-    politicalName = "Individualist";
-  } else if (politicalType == 5) {
-    politicalName = "Radical";
-  } else if (politicalType == 6) {
-    politicalName = "Progressive";
-  } else if (politicalType == 7) {
-    politicalName = "Communitarian";
-  } else if (politicalType == 8) {
-    politicalName = "Neoconservative";
+  if (userPlacement.politicalType == 1) {
+    userPlacement.politicalName = "Theoconservative";
+  } else if (userPlacement.politicalType == 2) {
+    userPlacement.politicalName = "Paleoconservative";
+  } else if (userPlacement.politicalType == 3) {
+    userPlacement.politicalName = "Paleolibertarian";
+  } else if (userPlacement.politicalType == 4) {
+    userPlacement.politicalName = "Individualist";
+  } else if (userPlacement.politicalType == 5) {
+    userPlacement.politicalName = "Radical";
+  } else if (userPlacement.politicalType == 6) {
+    userPlacement.politicalName = "Progressive";
+  } else if (userPlacement.politicalType == 7) {
+    userPlacement.politicalName = "Communitarian";
+  } else if (userPlacement.politicalType == 8) {
+    userPlacement.politicalName = "Neoconservative";
   } else {
-    politicalName = "Populist";
+    userPlacement.politicalName = "Populist";
   }
 
-  return politicalName;
-
-  /** 
-  //check placement of political type with question 3
-  if (q3 == politicalType) {
-    return politicalName;
-  } else if (politicalType != 1 && politicalType != 8) {
-    if (politicalType + 1 == q3 || politicalType - 1 == q3) {
-      return politicalName;
-    } else {
-      return "cannot figure out";
-    }
-  } else if (politicalType == 1) {
-    if (politicalType + 1 == q3 || q3 == 8) {
-      return politicalName;
-    } else {
-      return "cannot figure out";
-    }
-  }
-  */
-  //return "nothing";
+  return `
+    <>
+      <h1>Results</h1>
+      <p>Based on your answers, you are a ${userPlacement.politicalName}.</p>
+      <p>Here are some news sources that you might read to learn more about what other political types think.</p>
+      <ul>
+        ${(userPlacement.wing == "left" ? await parseCNN("politics") : await parseFOX("politics")).map((article) => {
+          return `<li><a href="${article}">${article}</a></li>`;
+        })}
+    </>
+  `;
 };

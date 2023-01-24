@@ -41,7 +41,7 @@ router.post("/results", async (req: Request, res: Response) => {
   );
 
   // get the user's results
-  const results = fecthResults(descriptors);
+  const results = await fecthResults(descriptors);
   // send the results tso the client
   res.send({ results: results });
   return;

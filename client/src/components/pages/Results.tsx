@@ -13,11 +13,7 @@ const displayResult = async (userId: string) => {
     return <></>;
   }
   const serverData = await post("/api/results", { userId: userId, testObj: testObj }).then((res) => {
-    return (
-      <>
-        <p>{res.results}</p>
-      </>
-    );
+    return <div dangerouslySetInnerHTML={{ __html: res.results }}></div>;
   });
 
   // return the results
