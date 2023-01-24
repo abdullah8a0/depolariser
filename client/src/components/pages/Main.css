@@ -1,1 +1,45 @@
 /* Fill me in :) */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@300;600&display=swap");
+
+.missionBox {
+  background-color: #dbd56e;
+  padding: 8px;
+  margin: 16px;
+  border-radius: 8px;
+}
+
+.column {
+  display: flex;
+  flex-direction: row;
+  flex-basis: auto;
+  align-content: stretch;
+  align-items: center;
+}
+
+.leftColumn {
+  background-color: #fc7753;
+  padding: 8px;
+  margin: 16px;
+  flex: 1;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.rightColumn {
+  background-color: #fc7753;
+  padding: 8px;
+  margin: 16px;
+  flex: 1;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.background {
+  background-color: #f2efea;
+}
+
+.button {
+  background-color: #f2efea;
+  border-radius: 8px;
+}
