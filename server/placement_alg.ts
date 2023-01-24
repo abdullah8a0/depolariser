@@ -199,14 +199,14 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<str
   }
 
   return `
-    <>
       <h1>Results</h1>
       <p>Based on your answers, you are a ${userPlacement.politicalName}.</p>
-      <p>Here are some news sources that you might read to learn more about what other political types think.</p>
+      <p>Here are some news sources that you might read to learn more about what other people think.</p>
       <ul>
         ${(userPlacement.wing == "left" ? await parseCNN("politics") : await parseFOX("politics")).map((article) => {
           return `<li><a href="${article}">${article}</a></li>`;
         })}
-    </>
+      </ul>
+
   `;
 };
