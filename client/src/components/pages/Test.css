@@ -1,21 +1,66 @@
-/* toggle opacity and make font bold of div.testBool on clicking*/
+@import url("./utils.css");
 
+input {
+  text-align: center;
+  vertical-align: middle;
+}
 .testBool,
 .testOption {
   opacity: 0.6;
+  transition: opacity 0.2s;
+  border-radius: 0.5rem;
+  border: 1px solid var(--secondary-color);
+}
+
+.testBool {
+  font-size: clamp(0.1rem, 0.7rem, 1rem);
+  width: 250px;
+  height: 56px;
+  max-width: 100%;
 }
 
 .testBool:hover,
 .testOption:hover {
   opacity: 1;
-}
-
-[data-selected="1"] {
-  opacity: 1;
-  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--hover-color);
 }
 
 [data-selected="true"] {
   opacity: 1;
-  font-weight: bold;
+  background-color: var(--tertiary-color);
+}
+
+.testBool:hover[data-selected="true"] {
+  background-color: var(--secondary-hover-color);
+}
+
+.testBoolContainer {
+  padding: 1rem;
+  display: grid;
+  align-self: center;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%/3, 200px), 1fr));
+  grid-gap: clamp(0.5rem, 0.7rem, 2rem);
+}
+
+.testOption {
+  font-size: clamp(0.1rem, 0.7rem, 1rem);
+  text-align: left;
+  margin-top: 2px;
+}
+.testStatement {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+.testOptionContainer {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.testTitle {
+  margin-left: 1rem;
 }

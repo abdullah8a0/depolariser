@@ -1,0 +1,27 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 0 1rem;
+  height: 4rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.NavBar-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+
+.NavBar-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.Router-link {
+  text-decoration: none;
+  color: #333;
+}

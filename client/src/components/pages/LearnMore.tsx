@@ -5,7 +5,6 @@ import "./LearnMore.css";
 
 type Props = RouteComponentProps & {
   userId?: string;
-  handleLogout: () => void;
 };
 
 const LearnMore = (props: Props) => {

@@ -6,15 +6,17 @@ import { Link, RouteComponentProps } from "@reach/router";
 
 const displayTest = async (tester: TestObject) => {
   const tests = await tester.getTests().then((tests) => tests.map((test, i) => <Button test={test} tester={tester} key={i} />));
-
+  const testBools = tests.filter((test) => test.props.test.type === "bool");
+  const testOptions = tests.filter((test) => test.props.test.type === "option");
+  const testScales = tests.filter((test) => test.props.test.type === "scale");
   return (
     <>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-      <p>Take the test</p>
-      <p>Select which news sources do you usually read</p>
-      {tests}
+      <p className="testTitle">Select which news sources do you usually read</p>
+      <div className="testBoolContainer">{testBools}</div>
+      <p className="testTitle">Select the statements you agree with the most?</p>
+      <div className="testOptionContainer">{testOptions}</div>
+      <p className="testTitle">How much do you agree with the following statements?</p>
+      <div className="testScaleContainer">{testScales}</div>
       <Link to="/results">
         <button
           onClick={() => {
@@ -31,11 +33,10 @@ const displayTest = async (tester: TestObject) => {
 // use location to get the state from the previous page
 type TestProps = RouteComponentProps & {
   userId?: string;
-  handleLogout: () => void;
 };
 
 const Test = (props: TestProps) => {
-  const { userId, handleLogout } = props;
+  const { userId } = props;
 
   useEffect(() => {
     if (!userId) {
@@ -59,20 +60,7 @@ const Test = (props: TestProps) => {
     });
   }, []);
 
-  return (
-    <>
-      <p>This is the test page!</p>
-      <button
-        onClick={() => {
-          window.location.href = "/";
-          handleLogout();
-        }}
-      >
-        Logout
-      </button>
-      {test}
-    </>
-  );
+  return <>{test}</>;
 };
 
 type ButtonProps = RouteComponentProps & {
@@ -107,16 +95,16 @@ const Button = (props: ButtonProps) => {
     /* toggle opacity of div.testBool on clicking*/
     return (
       <>
-        <button
+        <input
           className="testBool"
-          data-selected={selection}
+          type="button"
+          data-selected={selection == 1}
+          value={props.test.question}
           onClick={() => {
             setSelection(-1 * selection);
             props.tester.addSel(props.test.id, (selection === -1 ? 0 : 1).toString());
           }}
-        >
-          <p className="testStatement">{props.test.question}</p>
-        </button>
+        />
       </>
     );
   } else if (props.test.type === "option") {

@@ -12,7 +12,8 @@ import LearnMore from "./pages/LearnMore";
 import { socket } from "../client-socket";
 import User from "../../../shared/User";
 import "../utilities.css";
-import Results from "./pages/Results";
+import Feed from "./pages/Feed";
+import NavBar from "./modules/NavBar";
 
 const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
@@ -51,13 +52,16 @@ const App = () => {
   // All the pages need to have the props extended via RouteComponentProps for @reach/router to work properly. Please use the Skeleton as an example.
 
   return (
-    <Router>
-      <Main path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-      <Test path="/test" userId={userId} handleLogout={handleLogout} />
-      <Results path="/results" userId={userId} handleLogout={handleLogout} />
-      <LearnMore path="/learnmore" userId={userId} handleLogout={handleLogout} />
-      <NotFound default={true} />
-    </Router>
+    <>
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+      <Router>
+        <Main path="/" userId={userId} />
+        <Test path="/test" userId={userId} />
+        <Feed path="/feed" userId={userId} />
+        <LearnMore path="/learnmore" userId={userId} />
+        <NotFound default={true} />
+      </Router>
+    </>
   );
 };
 

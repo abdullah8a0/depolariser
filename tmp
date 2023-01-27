@@ -1,0 +1,14 @@
+/Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/node_modules/xmldom/lib/dom-parser.js:181
+		throw new ParseError(error, this.locator);
+        ^
+Error [ParseError]: Attribute role redefined
+    at DOMHandler.fatalError (/Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/node_modules/xmldom/lib/dom-parser.js:181:9)
+    at addAttribute (/Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/node_modules/xmldom/lib/sax.js:233:48)
+    at parseElementStartPart (/Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/node_modules/xmldom/lib/sax.js:266:6)
+    at parse (/Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/node_modules/xmldom/lib/sax.js:163:15)
+    at XMLReader.parse (/Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/node_modules/xmldom/lib/sax.js:45:3)
+    at DOMParser.parseFromString (/Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/node_modules/xmldom/lib/dom-parser.js:25:7)
+    at /Users/abdullah/Desktop/MIT/23IAP/weblab/abdullah8a0-oykuerus/client/src/scrape.ts:27:26
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  locator: { lineNumber: 687, columnNumber: 13 }
+}

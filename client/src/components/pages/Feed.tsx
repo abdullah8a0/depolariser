@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { post } from "../../utilities";
 
-import "./Results.css";
+import "./Feed.css";
 import { RouteComponentProps, Link } from "@reach/router";
 
 const displayResult = async (userId: string) => {
@@ -38,14 +38,13 @@ const displayResult = async (userId: string) => {
 
 type Props = RouteComponentProps & {
   userId?: string;
-  handleLogout: () => void;
 };
 const Results = (props: Props) => {
-  const { userId, handleLogout } = props;
+  const { userId } = props;
   useEffect(() => {
     if (!userId) {
-      alert("You must be logged in to view this page");
-      window.location.href = "/";
+      // alert("You must be logged in to view this page");
+      // window.location.href = "/";
     }
   }, [userId]);
 
@@ -63,18 +62,6 @@ const Results = (props: Props) => {
 
   return (
     <>
-      <Link to="/">
-        <button>Home</button>
-      </Link>
-      <p>This is the results page!</p>
-      <button
-        onClick={() => {
-          window.location.href = "/";
-          handleLogout();
-        }}
-      >
-        Logout
-      </button>
       <h1>Your Results are:</h1>
       {result}
     </>
