@@ -39,6 +39,7 @@ const NavBar = (props: NavBarProps) => {
               onClick={() => {
                 googleLogout();
                 handleLogout();
+                window.location.href = "/";
               }}
             >
               Logout

@@ -2,29 +2,35 @@ import React, { useEffect, useState } from "react";
 import { post } from "../../utilities";
 
 import "./Feed.css";
-import { RouteComponentProps, Link } from "@reach/router";
+import { RouteComponentProps } from "@reach/router";
 
 const displayResult = async (userId: string) => {
   // fecth the results from the server with params = userId and testObj from local storage
 
   const testObj = localStorage.getItem("testObj");
   if (!testObj) {
-    alert("You must take the test before viewing the results");
-    window.location.href = "/";
-    return <></>;
+    // alert("You must take the test before viewing the results");
+    // window.location.href = "/";
+    // return <></>;
   }
   const serverData = await post("/api/results", { userId: userId, testObj: testObj }).then((res) => {
     return (
       <>
-        <h1>Results</h1>
         <p>Based on your answers, you are a {res.results.politicalName}.</p>
         <p>Here are some news sources that you might read to learn more about what other people think.</p>
-        <ul>
+        <ul className="suggestionsContainer">
           {res.results.suggestions.map((suggestion) => (
-            <li>
-              <img src={suggestion.img} />
-              <a href={suggestion.url}>{suggestion.title}</a>
-            </li>
+            <a href={suggestion.url}>
+              <li className="suggestionCard">
+                <img className="suggestionImg" src={suggestion.img} />
+                <div className="suggestionTitle">{suggestion.title}</div>
+                <div className="suggestionDesc">
+                  {" "}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl aliquet nunc, eget
+                  aliquet nisl nisl sit amet nunc.
+                </div>
+              </li>
+            </a>
           ))}
         </ul>
       </>
@@ -49,13 +55,13 @@ const Results = (props: Props) => {
   }, [userId]);
 
   if (!userId) {
-    return <></>;
+    // return <></>;
   }
 
   const [result, setResult] = useState<JSX.Element>(<></>);
 
   useEffect(() => {
-    displayResult(userId).then((result) => {
+    displayResult(userId!).then((result) => {
       setResult(result);
     });
   }, []);

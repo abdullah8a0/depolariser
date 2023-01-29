@@ -47,7 +47,9 @@ input {
   font-size: clamp(0.1rem, 0.7rem, 1rem);
   text-align: left;
   margin-top: 2px;
+  width: clamp(100px, 100%, 700px);
 }
+
 .testStatement {
   font-size: 1.5rem;
   font-weight: 300;
