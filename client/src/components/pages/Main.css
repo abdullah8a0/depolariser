@@ -3,35 +3,52 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Open+Sans:wght@300;600&display=swap");
 
 @import url("./utils.css");
-.missionBox {
-  background-color: #dbd56e;
-  padding: 8px;
-  margin: 16px;
-  border-radius: 8px;
-}
-
-.column {
-  display: flex;
-  flex-direction: row;
-  flex-basis: auto;
-  align-content: stretch;
-  align-items: center;
-}
-
-.smallColumn {
-  background-color: #fc7753;
-  padding: 8px;
-  margin: 16px;
-  flex: 1;
-  text-align: center;
-  border-radius: 8px;
-}
 
 .background {
-  background-color: #f2efea;
+  background-color: var(--background-color);
+}
+
+.paragraph {
+  margin: 1rem;
+  text-align: justify;
+  color: var(--text-color);
+}
+
+.box {
+  display: grid;
+  align-self: center;
+  grid-template-columns: minmax(200px, 1fr) minmax(200px, 1fr);
+  grid-gap: clamp(0.5rem, 0.7rem, 2rem);
+  text-align: justify;
+  margin: 1rem;
+}
+
+.titleBox {
+  background-color: var(--primary-color);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.missionBox {
+  background-color: var(--secondary-color);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  color: var(--text-color);
+}
+
+.smallBox {
+  background-color: var(--secondary-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: var(--text-color);
 }
 
 .button {
-  background-color: #f2efea;
-  border-radius: 8px;
+  background-color: var(--tertiary-color);
+  border-radius: 0.5rem;
+  color: var(--text-color);
 }
