@@ -10,10 +10,11 @@ type Props = RouteComponentProps & {
 const LearnMore = (props: Props) => {
   return (
     <div className="background">
-      <div className="box">
+      <h1 className="titleBox smallTitle">Depolarizer</h1>
+      <div className="paragraph box">
         <div className="">
-          <h2 className="titleBox">What is it?</h2>
-          <div className="paragraph yellowBox">
+          <h2 className="firstBox smallTitle">What is it?</h2>
+          <div className="firstBox">
             <h4>
               Depolarizer is a website which is designed to figure out your political perspective and then to suggest news articles and sources which
               generally cater to people with opposing viewpoints. This website aims to foster a safe environment to increase the array of news sources
@@ -35,8 +36,8 @@ const LearnMore = (props: Props) => {
           </div>
         </div>
         <div className="">
-          <h2 className="titleBox">Why?</h2>
-          <div className="paragraph yellowBox">
+          <h2 className="firstBox smallTitle">Why?</h2>
+          <div className="firstBox">
             <h4>
               There is a growing divide between individuals with opposing political ideologies which leads to increasing hostility and lack of
               compromise between the two sides. Especially in recent years, this divide between liberals and conservatives has increased and political
@@ -58,7 +59,7 @@ const LearnMore = (props: Props) => {
       </div>
       <h2 className="titleBox">Political Perspectives:</h2>
       <div className="paragraph">
-        <h4 className="yellowBox">
+        <h4 className="firstBox">
           The chart below shows the four main traditions with the vertical axis as a scale of kratos/akrateia and a horizontal axis as a scale of
           archy/anarchy. The vertical axis can be better explained as the legitimacy of using the power of the state in order to achieve desirable
           social, economic or foreign policy outcomes. The traditions in the top of the chart are opposed to the use of power by the government and
@@ -67,7 +68,7 @@ const LearnMore = (props: Props) => {
           society in which people are taught to treat everyone as equals. The left side of the chart rejects rank, while the right accepts rank.
         </h4>
         <div className="box">
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Republic Constitutionalism:</h3>
             <h4>
               Republic Constitutionalism is placed in the upper right and characterized by pro-archy and anti-kratos. It is a tradition which opposes
@@ -83,7 +84,7 @@ const LearnMore = (props: Props) => {
               policies.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Libertarian Individualism:</h3>
             <h4>
               Libertarian Individualism is placed in the upper left and characterized by anti-archy and anti-kratos. It is a tradition which opposes
@@ -98,7 +99,7 @@ const LearnMore = (props: Props) => {
               personal and private matters.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Democratic Progressivism:</h3>
             <h4>
               Democratic Progressivism is placed in the bottom left and characterized by anti-archy and pro-kratos. It is a tradition which favors the
@@ -111,7 +112,7 @@ const LearnMore = (props: Props) => {
               emphasizes the importance of equality of opportunity.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Plutocratic Nationalism:</h3>
             <h4>
               Plutocratic Nationalism is placed in the bottom right and characterized by pro-archy and pro-kratos. It is a tradition which opposes the
@@ -124,60 +125,60 @@ const LearnMore = (props: Props) => {
             </h4>
           </div>
         </div>
-        <h4 className="yellowBox">
+        <h4 className="firstBox">
           These four main traditions can be divided into more detailed eight distinct political perspectives represented in contemporary American
           politics. A potential ninth political perspective is populism, which is vaguely defined and situation dependent. There is no fixed character
           of this group other than opposition to the prevailing power.
         </h4>
         <div className="box">
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Communitarian:</h3>
             <h4>
               Communitarianism is characterized by being ambivalent towards archy and prokratos, which means it is ambivalent about rank and supports
               an activist government.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Progressive:</h3>
             <h4>
               Progressivismis characterized by being anti archy and prokratos, which means it is egalitarian and supports an activist government.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Radical:</h3>
             <h4>
               Radicalism is characterized by being anti-archy and ambivalent towards kratos, which means it is egalitarian and is ambivalent about the
               role of government.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Individualist:</h3>
             <h4>
               Individualism is characterized by being anti-archy and anti kratos, which means it is egalitarian and supports a limited government.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Paleolibertarian:</h3>
             <h4>
               Paleolibertarianism is characterized by being ambivalent towards archy and anti-kratos, which means it is ambivalent about rank and
               supports a limited government.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Paleoconservative:</h3>
             <h4>
               Paleolibertarianism is characterized by being pro-archy and anti-kratos, which means it is hierarchical about rank and supports a
               limited government.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Theoconservative:</h3>
             <h4>
               Theoconsevatism is characterized by being pro-archy and ambivalent towards kratos, which means it is hierarchical about rank and
               ambivalent about the role of government.
             </h4>
           </div>
-          <div className="turquiseBox">
+          <div className="secondBox">
             <h3 className="smallTitle">Neoconservative:</h3>
             <h4>
               Neoconservatism is characterized by being pro-archy and pro-kratos, which means it is hierarchical about rank and supports an activist
@@ -187,7 +188,7 @@ const LearnMore = (props: Props) => {
         </div>
       </div>
       <h2 className="titleBox">News Sources</h2>
-      <h4 className="yellowBox paragraph"> The news sources we have used are below.</h4>
+      <h4 className="firstBox paragraph"> The news sources we have used are below.</h4>
     </div>
   );
 };

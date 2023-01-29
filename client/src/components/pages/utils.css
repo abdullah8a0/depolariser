@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 :root {
-  --primary-color: white;
-  --secondary-color: black;
-  --tertiary-color: grey;
+  --background-color: white;
+  --text-color: lightgrey;
+  --primary-color: grey;
+  --secondary-color: darkgrey;
+  --tertiary-color: black;
   --hover-color: lightgrey;
   --secondary-hover-color: darkgrey;
   background-color: var(--primary-color);
