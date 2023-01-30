@@ -24,6 +24,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: ["@babel/polyfill", entryFile],
+  allowedHosts: ["localhost"],
   output: {
     path: outputDir,
     publicPath: "/",

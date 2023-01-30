@@ -14,10 +14,10 @@ const Main = (props: Props) => {
   // the test button is shown when the user is logged in
   return (
     <>
-      <head>
+      {/* <div>
         <title>Depolarizer</title>
-      </head>
-      <body className="background">
+      </div> */}
+      <div className="background body">
         <h1 className="titleBox">Depolarizer</h1>
         <section className="missionBox">
           <h3>
@@ -39,7 +39,7 @@ const Main = (props: Props) => {
             </Link>
           </div>
         </section>
-      </body>
+      </div>
     </>
   );
 };
