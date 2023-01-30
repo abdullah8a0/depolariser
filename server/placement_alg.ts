@@ -87,8 +87,45 @@ const q22IdtoPoints = {
   "2.2.4": [-10, 10],
 };
 const q3IdtoPoints = {
-  "3.9": [0, 1, 2, 3, 4],
+  "3.1": [
+    [2, 3, 5],
+    [2, 3, 5],
+    [4, 7, 1],
+    [6, 0],
+    [6, 0],
+  ],
+  "3.2": [
+    [6, 2, 3],
+    [6, 2, 3],
+    [7, 1, 5],
+    [0, 4],
+    [0, 4],
+  ],
+  "3.3": [[1, 2], [1, 2], [0, 4, 3, 7, 5], [6], [6]],
+  "3.4": [[2], [2], [0, 4, 3, 7, 1], [5, 6], [5, 6]],
+  "3.5": [[2, 0, 7, 1], [2, 0, 7, 1], [6], [4, 3, 5], [4, 3, 5]],
+  "3.6": [[4, 3, 5], [4, 3, 5], [6], [2, 0, 7, 1], [2, 0, 7, 1]],
+  "3.7": [
+    [6, 5],
+    [6, 5],
+    [0, 4, 1],
+    [2, 3, 7],
+    [2, 3, 7],
+  ],
+  "3.8": [[2, 0, 7, 1], [2, 0, 7, 1], [6], [4, 3, 5], [4, 3, 5]],
+  "3.9": [[7], [7], [6, 0, 3, 1], [2, 4, 5], [2, 4, 5]],
 };
+/**
+ * Theoconservative = 0
+ * Paleoconservative = 1
+ * Paleolibertarian = 2
+ * Individualist = 3
+ * Radical = 4
+ * Progressive = 5
+ * Communitarian = 6
+ * Neoconservative = 7
+ * Populist = 8
+ */
 
 export const generateDescriptor = (selections: unknown, userId: string): DescriptorInterface => {
   if (
@@ -105,7 +142,7 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
   const q1Score: number[] = [];
   const q21Score: number[] = [];
   const q22Score: number[] = [];
-  const q3Score: number[] = [];
+  const q3Score: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
   for (const [key, value] of Object.entries(selectionsJSON) as [string, string][]) {
     if (key.match(/^1\./)) {
       q1Score.push(q1IdtoPoints[key][parseInt(value)]);
@@ -114,7 +151,10 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
     } else if (key.match(/^2.2\./)) {
       q22Score.push(q22IdtoPoints[key][parseInt(value)]);
     } else if (key.match(/^3\./)) {
-      q3Score.push(parseInt(value));
+      const indicesToInc = q3IdtoPoints[key][parseInt(value)] as number[];
+      indicesToInc.forEach((ind) => {
+        q3Score[ind]++;
+      });
     } else {
       assert(false, `Key ${key} is not valid`);
     }
@@ -123,7 +163,7 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
     q1Score.reduce((a, b) => a + b, 0) / Math.max(q1Score.length, 1),
     q21Score.reduce((a, b) => a + b, 0),
     q22Score.reduce((a, b) => a + b, 0),
-    q3Score.reduce((a, b) => a + b, 0) / Object.keys(q3IdtoPoints).length,
+    q3Score.indexOf(Math.max(...q3Score)),
   ];
 
   console.log(`Vector: ${vector}`);
@@ -181,59 +221,83 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
     politicalDescription: "",
   };
 
-  console.log(x, y);
-  console.log(descriptor.DescVector[3]);
+  //console.log(x, y);
+  //console.log(descriptor.DescVector[3]);
 
-  //based on question 1 and 2 political type is selected
+  //groups people into one of eight groups based on x and y values (q1, q2.1)
+  var group = 8;
+
   if (-pi / 8 < angle && angle < pi / 8) {
-    userPlacement.politicalType = 1;
+    group = 0;
   } else if (pi / 8 <= angle && angle < (3 * pi) / 8) {
-    userPlacement.politicalType = 2;
+    group = 1;
   } else if ((3 * pi) / 8 <= angle && angle < (5 * pi) / 8) {
-    userPlacement.politicalType = 3;
+    group = 2;
   } else if ((5 * pi) / 8 <= angle && angle < (7 * pi) / 8) {
-    userPlacement.politicalType = 4;
+    group = 3;
   } else if ((7 * pi) / 8 <= angle && angle < (-7 * pi) / 8) {
-    userPlacement.politicalType = 5;
+    group = 4;
   } else if ((-7 * pi) / 8 <= angle && angle < (-5 * pi) / 8) {
-    userPlacement.politicalType = 6;
+    group = 5;
   } else if ((-5 * pi) / 8 <= angle && angle < (-3 * pi) / 8) {
-    userPlacement.politicalType = 7;
+    group = 6;
   } else if ((-3 * pi) / 8 <= angle && angle < -pi / 8) {
-    userPlacement.politicalType = 8;
-  } else {
-    userPlacement.politicalType = 0;
+    group = 7;
+  }
+
+  if (x === 0 && y === 0) {
+    group = 8;
+  }
+
+  console.log(`group: ${group}`);
+
+  //check if it fits with the groups from by comparing to results form q3
+  if (group != q3) {
+    if (1 < group && group < 7) {
+      if (group + 1 === q3 || group - 1 === q3) {
+        group = q3;
+      } else {
+        group = 8;
+      }
+    } else {
+      if ((group === 7 && q3 === 1) || (group === 1 && q3 === 7)) {
+        group = q3;
+      } else {
+        group = 8;
+      }
+    }
   }
 
   // map the nummber to the name
-  if (userPlacement.politicalType == 1) {
+  if (group === 0) {
     userPlacement.politicalName = "Theoconservative";
     userPlacement.wing = "right";
-  } else if (userPlacement.politicalType == 2) {
+  } else if (group === 1) {
     userPlacement.politicalName = "Paleoconservative";
     userPlacement.wing = "right";
-  } else if (userPlacement.politicalType == 3) {
+  } else if (group === 2) {
     userPlacement.politicalName = "Paleolibertarian";
     userPlacement.wing = "right";
-  } else if (userPlacement.politicalType == 4) {
+  } else if (group === 3) {
     userPlacement.politicalName = "Individualist";
     userPlacement.wing = "right";
-  } else if (userPlacement.politicalType == 5) {
+  } else if (group === 4) {
     userPlacement.politicalName = "Radical";
     userPlacement.wing = "left";
-  } else if (userPlacement.politicalType == 6) {
+  } else if (group === 5) {
     userPlacement.politicalName = "Progressive";
     userPlacement.wing = "left";
-  } else if (userPlacement.politicalType == 7) {
+  } else if (group === 6) {
     userPlacement.politicalName = "Communitarian";
     userPlacement.wing = "left";
-  } else if (userPlacement.politicalType == 8) {
+  } else if (group === 7) {
     userPlacement.politicalName = "Neoconservative";
     userPlacement.wing = "right";
   } else {
     userPlacement.politicalName = "Populist";
     userPlacement.wing = "right";
   }
+
   return {
     politicalName: userPlacement.politicalName,
     suggestions: await generateSuggestions(userPlacement),
