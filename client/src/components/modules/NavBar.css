@@ -1,3 +1,13 @@
+/*  Mobile-first design. So hamburger menu is default*/
+/*
+className="NavBar-hamburger-wrapper">
+className="NavBar-hamburger">
+className="NavBar-hamburger-toggle">
+className="NavBar-hamburger-line" />
+className="NavBar-hamburger-line" />
+className="NavBar-hamburger-line" />
+className="NavBar-hamburger-dropdown">
+*/
 nav {
   display: flex;
   justify-content: space-between;
@@ -7,12 +17,12 @@ nav {
   height: 4rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
 }
-
 .NavBar-links {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 50%;
+  display: none;
+}
+
+.NavBar-login {
+  display: none;
 }
 
 .NavBar-title {
@@ -24,4 +34,110 @@ nav {
 .Router-link {
   text-decoration: none;
   color: #333;
+}
+
+.NavBar-hamburger-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.NavBar-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.NavBar-hamburger-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.NavBar-hamburger-line {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+}
+
+.NavBar-hamburger-dropdown {
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  width: 100%;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.NavBar-hamburger-dropdown a {
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  color: #333;
+}
+
+.NavBar-hamburger-dropdown a:hover {
+  background-color: #e5e5e5;
+}
+
+.NavBar-hamburger-dropdown[aria-hidden="true"] {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 0 1rem;
+    height: 4rem;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .NavBar-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+  }
+
+  .NavBar-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .NavBar-hamburger-wrapper {
+    display: none;
+  }
+
+  .NavBar-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .NavBar-login {
+    display: flex;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .Router-link {
+    text-decoration: none;
+    color: #333;
+  }
 }

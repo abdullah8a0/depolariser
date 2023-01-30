@@ -16,12 +16,12 @@ const displayResult = async (userId: string) => {
   const serverData = await post("/api/results", { userId: userId, testObj: testObj }).then((res) => {
     return (
       <>
-        <p>Based on your answers, you are a {res.results.politicalName}.</p>
-        <p>Here are some news sources that you might read to learn more about what other people think.</p>
+        <p className="resultText">Based on your answers, you are a {res.results.politicalName}.</p>
+        <p className="resultText">Here are some news sources that you might read to learn more about what other people think.</p>
         <ul className="suggestionsContainer">
-          {res.results.suggestions.map((suggestion) => (
+          {res.results.suggestions.map((suggestion, i) => (
             <a href={suggestion.url}>
-              <li className="suggestionCard">
+              <li className="suggestionCard" key={i}>
                 <img className="suggestionImg" src={suggestion.img} />
                 <div className="suggestionTitle">{suggestion.title}</div>
                 <div className="suggestionDesc">
@@ -64,12 +64,7 @@ const Results = (props: Props) => {
     });
   }, []);
 
-  return (
-    <>
-      <h1>Your Results are:</h1>
-      {result}
-    </>
-  );
+  return <>{result}</>;
 };
 
 export default Results;
