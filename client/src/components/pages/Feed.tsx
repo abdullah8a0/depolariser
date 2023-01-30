@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { post } from "../../utilities";
-
+import img from "../NoImg.png";
 import "./Feed.css";
 import { RouteComponentProps } from "@reach/router";
 
@@ -22,13 +22,9 @@ const displayResult = async (userId: string) => {
           {res.results.suggestions.map((suggestion, i) => (
             <a href={suggestion.url}>
               <li className="suggestionCard" key={i}>
-                <img className="suggestionImg" src={suggestion.img} />
+                <img className="suggestionImg" src={suggestion.img !== "NoImg" && suggestion.img !== "none" ? suggestion.img : img} />
                 <div className="suggestionTitle">{suggestion.title}</div>
-                <div className="suggestionDesc">
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl aliquet nunc, eget
-                  aliquet nisl nisl sit amet nunc.
-                </div>
+                <div className="suggestionDesc">{suggestion.desc} </div>
               </li>
             </a>
           ))}
