@@ -92,7 +92,7 @@ export class TestObject implements TestInterface {
       },
       {
         id: "1.10",
-        question: "CBS News (Online)",
+        question: "CBS News",
         type: "bool",
       },
       {
@@ -100,233 +100,233 @@ export class TestObject implements TestInterface {
         question: "Christian Science Monitor",
         type: "bool",
       },
-      {
+      /**{
         id: "1.12",
         question: "CNN (Online News)",
         type: "bool",
-      },
+      },*/
       {
-        id: "1.13",
+        id: "1.12",
         question: "CNN (Opinion)",
         type: "bool",
       },
       {
-        id: "1.14",
+        id: "1.13",
         question: "Daily Beast",
         type: "bool",
       },
       {
-        id: "1.15",
+        id: "1.14",
         question: "Daily Mail",
         type: "bool",
       },
       {
-        id: "1.16",
+        id: "1.15",
         question: "Democracy Now",
         type: "bool",
       },
       {
-        id: "1.17",
+        id: "1.16",
         question: "Forbes",
         type: "bool",
       },
       {
-        id: "1.18",
-        question: "Fox News (Online News)",
+        id: "1.17",
+        question: "Fox News",
         type: "bool",
       },
-      {
+      /**{  
         id: "1.19",
         question: "Fox News (Opinion)",
         type: "bool",
-      },
+      }, */
       {
-        id: "1.20",
+        id: "1.18",
         question: "HuffPost",
         type: "bool",
       },
       {
-        id: "1.21",
+        id: "1.19",
         question: "Insider",
         type: "bool",
       },
       {
-        id: "1.22",
+        id: "1.20",
         question: "Mother Jones",
         type: "bool",
       },
       {
-        id: "1.23",
+        id: "1.21",
         question: "MSNBC",
         type: "bool",
       },
       {
-        id: "1.24",
+        id: "1.22",
         question: "National Review",
         type: "bool",
       },
       {
+        id: "1.23",
+        question: "NBC News",
+        type: "bool",
+      },
+      {
+        id: "1.24",
+        question: "New York Post",
+        type: "bool",
+      },
+      {
         id: "1.25",
-        question: "NBC News (Online)",
+        question: "New York Times",
         type: "bool",
       },
-      {
-        id: "1.26",
-        question: "New York Post (News)",
-        type: "bool",
-      },
-      {
-        id: "1.27",
-        question: "New York Times (News)",
-        type: "bool",
-      },
-      {
+      /**{  
         id: "1.28",
         question: "New York Times (Opinion)",
         type: "bool",
-      },
+      }, */
       {
-        id: "1.29",
+        id: "1.26",
         question: "NewsNation",
         type: "bool",
       },
       {
-        id: "1.30",
+        id: "1.27",
         question: "Newsweek",
         type: "bool",
       },
       {
-        id: "1.31",
-        question: "NPR (Online News)",
+        id: "1.28",
+        question: "NPR",
         type: "bool",
       },
-      {
+      /** { 
         id: "1.32",
         question: "NPR (Opinion)",
         type: "bool",
-      },
+      }, */
       {
-        id: "1.33",
+        id: "1.29",
         question: "Politico",
         type: "bool",
       },
       {
-        id: "1.34",
+        id: "1.30",
         question: "Reason",
         type: "bool",
       },
       {
-        id: "1.35",
+        id: "1.31",
         question: "Reuters",
         type: "bool",
       },
       {
-        id: "1.36",
+        id: "1.32",
         question: "Slate",
         type: "bool",
       },
       {
-        id: "1.37",
+        id: "1.33",
         question: "The American Spectator",
         type: "bool",
       },
       {
-        id: "1.38",
+        id: "1.34",
         question: "The Atlantic",
         type: "bool",
       },
       {
-        id: "1.39",
+        id: "1.35",
         question: "The Blaze",
         type: "bool",
       },
       {
-        id: "1.40",
+        id: "1.36",
         question: "The Daily Caller",
         type: "bool",
       },
       {
-        id: "1.41",
+        id: "1.37",
         question: "The Daily Wire",
         type: "bool",
       },
       {
-        id: "1.42",
+        id: "1.38",
         question: "The Economist",
         type: "bool",
       },
       {
-        id: "1.43",
+        id: "1.39",
         question: "The Epoch Times",
         type: "bool",
       },
       {
-        id: "1.44",
+        id: "1.40",
         question: "The Federalist",
         type: "bool",
       },
       {
-        id: "1.45",
+        id: "1.41",
         question: "The Guardian",
         type: "bool",
       },
       {
-        id: "1.46",
+        id: "1.42",
         question: "The Hill",
         type: "bool",
       },
       {
-        id: "1.47",
+        id: "1.43",
         question: "The Intercept",
         type: "bool",
       },
       {
-        id: "1.48",
+        id: "1.44",
         question: "The New Yorker",
         type: "bool",
       },
       {
-        id: "1.49",
+        id: "1.45",
         question: "Time Magazine",
         type: "bool",
       },
       {
-        id: "1.50",
+        id: "1.46",
         question: "USA TODAY",
         type: "bool",
       },
       {
-        id: "1.51",
+        id: "1.47",
         question: "Vox",
         type: "bool",
       },
       {
-        id: "1.52",
-        question: "Wall Street Journal (News)",
+        id: "1.48",
+        question: "Wall Street Journal",
         type: "bool",
       },
-      {
+      /**{  
         id: "1.53",
         question: "Wall Street Jounral (Opinion)",
         type: "bool",
-      },
+      }, */
       {
-        id: "1.54",
+        id: "1.49",
         question: "Washington Examiner",
         type: "bool",
       },
       {
-        id: "1.55",
+        id: "1.50",
         question: "Washington Free Beacon",
         type: "bool",
       },
       {
-        id: "1.56",
+        id: "1.51",
         question: "Washington Post",
         type: "bool",
       },
       {
-        id: "1.57",
+        id: "1.52",
         question: "Washington Times",
         type: "bool",
       },
