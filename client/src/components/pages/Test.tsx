@@ -17,7 +17,7 @@ const displayTest = async (tester: TestObject) => {
       <div className="testOptionContainer">{testOptions}</div>
       <p className="testTitle">How much do you agree with the following statements?</p>
       <div className="testScaleContainer">{testScales}</div>
-      <Link to="/results">
+      <Link to="/feed">
         <button
           onClick={() => {
             tester.save();
@@ -48,8 +48,6 @@ const Test = (props: TestProps) => {
   if (!userId) {
     return <></>;
   }
-
-  // render the test page
 
   const [test, setTest] = useState<JSX.Element>(<></>);
   const tester = new TestObject();

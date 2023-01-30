@@ -9,9 +9,9 @@ const displayResult = async (userId: string) => {
 
   const testObj = localStorage.getItem("testObj");
   if (!testObj) {
-    // alert("You must take the test before viewing the results");
-    // window.location.href = "/";
-    // return <></>;
+    alert("You must take the test before viewing the results");
+    window.location.href = "/";
+    return <></>;
   }
   const serverData = await post("/api/results", { userId: userId, testObj: testObj }).then((res) => {
     return (
@@ -37,8 +37,6 @@ const displayResult = async (userId: string) => {
     );
   });
 
-  // return the results
-
   return Promise.resolve(serverData);
 };
 
@@ -49,13 +47,13 @@ const Results = (props: Props) => {
   const { userId } = props;
   useEffect(() => {
     if (!userId) {
-      // alert("You must be logged in to view this page");
-      // window.location.href = "/";
+      alert("You must be logged in to view this page");
+      window.location.href = "/";
     }
   }, [userId]);
 
   if (!userId) {
-    // return <></>;
+    return <></>;
   }
 
   const [result, setResult] = useState<JSX.Element>(<></>);
