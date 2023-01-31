@@ -241,7 +241,7 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
   //groups people into one of eight groups based on x and y values (q1, q2.1)
   var group8 = 8;
 
-  if (-pi / 8 < angle && angle < pi / 8) {
+  if ((-pi / 8 < angle && angle >= 0) || (angle > pi && angle < pi / 8)) {
     group8 = 0;
   } else if (pi / 8 <= angle && angle < (3 * pi) / 8) {
     group8 = 1;
@@ -249,7 +249,7 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
     group8 = 2;
   } else if ((5 * pi) / 8 <= angle && angle < (7 * pi) / 8) {
     group8 = 3;
-  } else if ((7 * pi) / 8 <= angle && angle < (-7 * pi) / 8) {
+  } else if (((7 * pi) / 8 <= angle && angle < pi) || (angle < (-7 * pi) / 8 && angle > -pi)) {
     group8 = 4;
   } else if ((-7 * pi) / 8 <= angle && angle < (-5 * pi) / 8) {
     group8 = 5;
@@ -262,6 +262,10 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
   if (x === 0 && y === 0) {
     group8 = 8;
   }
+
+  console.log(`pi: ${pi}`);
+
+  console.log(`angle: ${angle}`);
 
   console.log(`group8: ${group8}`);
   console.log(`q3: ${q3}`);
@@ -290,13 +294,15 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
 
   if (0 <= angle && angle < pi / 2) {
     group4 = 0;
-  } else if (pi / 2 <= angle && angle < pi) {
+  } else if (pi / 2 <= angle && angle <= pi) {
     group4 = 1;
   } else if (-pi / 2 <= angle && angle < 0) {
     group4 = 3;
   } else if (-pi <= angle && angle < -pi / 2) {
     group4 = 2;
   }
+
+  console.log(`group4: ${group4}`);
 
   if (x === 0 && y === 0) {
     group4 = 4;
@@ -318,6 +324,8 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
       }
     }
   }
+
+  console.log(`q2: ${q2}`);
 
   console.log(`group4: ${group4}`);
 
