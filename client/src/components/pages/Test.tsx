@@ -99,8 +99,8 @@ const Button = (props: ButtonProps) => {
           data-selected={selection == 1}
           value={props.test.question}
           onClick={() => {
+            props.tester.addSel(props.test.id, selection === -1 ? "1" : "0");
             setSelection(-1 * selection);
-            props.tester.addSel(props.test.id, (selection === -1 ? 0 : 1).toString());
           }}
         />
       </>
