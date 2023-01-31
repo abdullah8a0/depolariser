@@ -14,11 +14,13 @@ type NavBarProps = RouteComponentProps & {
 };
 const NavBar = (props: NavBarProps) => {
   const { userId, handleLogin, handleLogout } = props;
+
+  const [isHamburgerOpen, setIsHamburgerOpen] = React.useState(false);
   return (
     <nav className="NavBar-container">
       <div className="NavBar-title">
         <Link className="Router-link" to="/">
-          Home
+          Depolariser
         </Link>
       </div>
       <div className="NavBar-links">
@@ -48,6 +50,51 @@ const NavBar = (props: NavBarProps) => {
             <GoogleLogin onSuccess={handleLogin} onError={() => console.log("Error Logging in")} />
           )}
         </GoogleOAuthProvider>
+      </div>
+
+      <div className="NavBar-hamburger-wrapper">
+        <div className="NavBar-hamburger">
+          <button
+            className="NavBar-hamburger-toggle"
+            type="button"
+            aria-label="Menu"
+            aria-controls="navigation"
+            aria-expanded={isHamburgerOpen}
+            aria-haspopup="true"
+            onClick={() => setIsHamburgerOpen(!isHamburgerOpen)}
+          >
+            <div className="NavBar-hamburger-line" />
+            <div className="NavBar-hamburger-line" />
+            <div className="NavBar-hamburger-line" />
+          </button>
+
+          <div className="NavBar-hamburger-dropdown" aria-hidden={!isHamburgerOpen} onClick={() => setIsHamburgerOpen(false)}>
+            <Link className="Router-link" to="/test">
+              Test
+            </Link>
+            <Link className="Router-link" to="/feed">
+              Feed
+            </Link>
+            <Link className="Router-link" to="/learnmore">
+              Learn More
+            </Link>
+            <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+              {userId ? (
+                <button
+                  onClick={() => {
+                    googleLogout();
+                    handleLogout();
+                    window.location.href = "/";
+                  }}
+                >
+                  Logout
+                </button>
+              ) : (
+                <GoogleLogin onSuccess={handleLogin} onError={() => console.log("Error Logging in")} />
+              )}
+            </GoogleOAuthProvider>
+          </div>
+        </div>
       </div>
     </nav>
   );

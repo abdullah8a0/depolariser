@@ -9,7 +9,7 @@ import Main from "./pages/Main";
 import Test from "./pages/Test";
 import LearnMore from "./pages/LearnMore";
 
-import { socket } from "../client-socket";
+// import { socket } from "../client-socket";
 import User from "../../../shared/User";
 import "../utilities.css";
 import Feed from "./pages/Feed";
@@ -19,18 +19,17 @@ const App = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    get("/api/whoami")
-      .then((user: User) => {
-        if (user._id) {
-          // TRhey are registed in the database and currently logged in.
-          setUserId(user._id);
-        }
-      })
-      .then(() =>
-        socket.on("connect", () => {
-          post("/api/initsocket", { socketid: socket.id });
-        })
-      );
+    get("/api/whoami").then((user: User) => {
+      if (user._id) {
+        // TRhey are registed in the database and currently logged in.
+        setUserId(user._id);
+      }
+    });
+    // .then(() =>
+    //   socket.on("connect", () => {
+    //     post("/api/initsocket", { socketid: socket.id });
+    //   })
+    // );
   }, []);
 
   const handleLogin = (credentialResponse: CredentialResponse) => {
@@ -39,7 +38,7 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
-      post("/api/initsocket", { socketid: socket.id });
+      // post("/api/initsocket", { socketid: socket.id });
     });
   };
 

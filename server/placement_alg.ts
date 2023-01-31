@@ -214,7 +214,8 @@ const generateSuggestions = async (userPlacement: PolInfo): Promise<InfoCard[]> 
       FOXCards: await parseFOX("politics"),
     });
     await newCard.save();
-    return userPlacement.wing == "left" ? newCard.FOXCards : newCard.CNNCards;
+    return userPlacement.wing === "left" ? newCard.FOXCards : newCard.CNNCards;
+    // return newCard.FOXCards; // TODO: change this back to the above line
   }
 };
 

@@ -6,7 +6,7 @@ import dotenv from "dotenv"; // Allows us to use environmental variables
 import morgan from "morgan"; // Request logger (https://github.com/expressjs/morgan). Can be removed if you wish.
 import path from "path"; // Allows us to retrieve file paths
 import auth from "./auth"; // weblab authentication helper
-import socketManager from "./server-socket"; // websockets
+// import socketManager from "./server-socket"; // websockets
 import api from "./api";
 // Loads environmental variables
 dotenv.config({});
@@ -78,7 +78,7 @@ app.use((err: ResponseError, _req: Request, res: Response) => {
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
-socketManager.init(server);
+// socketManager.init(server);
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

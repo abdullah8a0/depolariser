@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import auth from "./auth";
-import socketManager from "./server-socket";
+// import socketManager from "./server-socket";
 import Descriptor from "./models/Descriptor";
 import { generateDescriptor, fecthResults } from "./placement_alg";
 const router = express.Router();
@@ -14,14 +14,14 @@ router.get("/whoami", (req: Request, res: Response) => {
   }
   res.send(req.user);
 });
-router.post("/initsocket", (req: Request, res: Response) => {
-  // do nothing if user not logged in
-  if (req.user) {
-    const socket = socketManager.getSocketFromSocketID(req.body.socketid);
-    if (socket !== undefined) socketManager.addUser(req.user, socket);
-  }
-  res.send({});
-});
+// router.post("/initsocket", (req: Request, res: Response) => {
+//   // do nothing if user not logged in
+//   if (req.user) {
+//     const socket = socketManager.getSocketFromSocketID(req.body.socketid);
+//     if (socket !== undefined) socketManager.addUser(req.user, socket);
+//   }
+//   res.send({});
+// });
 router.post("/results", async (req: Request, res: Response) => {
   // get the user's id
   if (!req.user) {
