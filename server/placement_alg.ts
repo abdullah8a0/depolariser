@@ -116,11 +116,11 @@ const q3IdtoPoints = {
   "3.5": [[2, 0, 7, 1], [2, 0, 7, 1], [6], [4, 3, 5], [4, 3, 5]],
   "3.6": [[4, 3, 5], [4, 3, 5], [6], [2, 0, 7, 1], [2, 0, 7, 1]],
   "3.7": [
+    [2, 3, 7],
+    [2, 3, 7],
     [6, 5],
     [6, 5],
     [0, 4, 1],
-    [2, 3, 7],
-    [2, 3, 7],
   ],
   "3.8": [[2, 0, 7, 1], [2, 0, 7, 1], [6], [4, 3, 5], [4, 3, 5]],
   "3.9": [[7], [7], [6, 0, 3, 1], [2, 4, 5], [2, 4, 5]],
@@ -263,18 +263,19 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
     group8 = 8;
   }
 
-  console.log(`group: ${group8}`);
+  console.log(`group8: ${group8}`);
+  console.log(`q3: ${q3}`);
 
   //check if it fits with the groups from by comparing to results form q3
   if (group8 != q3) {
-    if (1 < group8 && group8 < 7) {
+    if (0 < group8 && group8 < 7) {
       if (group8 + 1 === q3 || group8 - 1 === q3) {
         group8 = q3;
       } else {
         group8 = 8;
       }
     } else {
-      if ((group8 === 7 && q3 === 1) || (group8 === 1 && q3 === 7)) {
+      if ((group8 === 7 && q3 === 0) || (group8 === 1 && q3 === 0)) {
         group8 = q3;
       } else {
         group8 = 8;
@@ -282,22 +283,26 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
     }
   }
 
+  console.log(`group8: ${group8}`);
+
   //groups people into one of four groups based on x and y values (q1, q2.1)
   var group4 = 4;
 
   if (0 <= angle && angle < pi / 2) {
-    group8 = 0;
+    group4 = 0;
   } else if (pi / 2 <= angle && angle < pi) {
-    group8 = 1;
+    group4 = 1;
   } else if (-pi / 2 <= angle && angle < 0) {
-    group8 = 3;
+    group4 = 3;
   } else if (-pi <= angle && angle < -pi / 2) {
-    group8 = 2;
+    group4 = 2;
   }
 
   if (x === 0 && y === 0) {
     group4 = 4;
   }
+
+  console.log(`group4: ${group4}`);
 
   //check if it fits with the groups from second part of q2
   if (q2 != group4) {
@@ -314,23 +319,25 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
     }
   }
 
+  console.log(`group4: ${group4}`);
+
   //check if the grouping into 4 and grouping into 8 work together
-  if (group4 === 0) {
+  if (group4 === 0 && group8 != 8) {
     if (group8 != 0 && group8 != 1 && group8 != 2) {
       group4 = 4;
       group8 = 8;
     }
-  } else if (group4 === 1) {
+  } else if (group4 === 1 && group8 != 8) {
     if (group8 != 2 && group8 != 3 && group8 != 4) {
       group4 = 4;
       group8 = 8;
     }
-  } else if (group4 === 2) {
+  } else if (group4 === 2 && group8 != 8) {
     if (group8 != 4 && group8 != 5 && group8 != 6) {
       group4 = 4;
       group8 = 8;
     }
-  } else if (group4 === 3) {
+  } else if (group4 === 3 && group8 != 8) {
     if (group8 != 6 && group8 != 7 && group8 != 8) {
       group4 = 4;
       group8 = 8;
@@ -349,7 +356,7 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
       userPlacement.politicalName = "Republican Constitutionalist (Paleolibertarian)";
       userPlacement.wing = "right";
     } else {
-      userPlacement.politicalName = "???";
+      userPlacement.politicalName = "Republican Constitutionalist (Populist)";
       userPlacement.wing = "right";
     }
   } else if (group4 === 1) {
@@ -363,7 +370,7 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
       userPlacement.politicalName = "Libertarian Individualist (Radical)";
       userPlacement.wing = "right";
     } else {
-      userPlacement.politicalName = "???";
+      userPlacement.politicalName = "Libertarian Individualist (Populist)";
       userPlacement.wing = "right";
     }
   } else if (group4 === 2) {
@@ -377,7 +384,7 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
       userPlacement.politicalName = "Progressive Democrat (Communitarian)";
       userPlacement.wing = "right";
     } else {
-      userPlacement.politicalName = "???";
+      userPlacement.politicalName = "Progressive Democrat (Populist)";
       userPlacement.wing = "right";
     }
   } else if (group4 === 3) {
@@ -391,11 +398,11 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
       userPlacement.politicalName = "Plutocratic Nationalist (Theoconservative)";
       userPlacement.wing = "right";
     } else {
-      userPlacement.politicalName = "???";
+      userPlacement.politicalName = "Plutocratic Nationalist (Populist)";
       userPlacement.wing = "right";
     }
   } else if (group4 === 4) {
-    userPlacement.politicalName = "Populist?";
+    userPlacement.politicalName = "Populist";
     userPlacement.wing = "right";
   }
 
