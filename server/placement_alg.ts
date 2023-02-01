@@ -81,11 +81,21 @@ const q21IdtoPoints = {
   "2.1.3": [-5, 0, 5],
 };
 const q22IdtoPoints = {
-  "2.2.1": [-10, 0, 10],
-  "2.2.2": [-10, 0, 10],
-  "2.2.3": [-10, 10],
-  "2.2.4": [-10, 10],
+  "2.2.1": [[2], [1, 3], [0]],
+  "2.2.2": [[2], [1], [3, 0]],
+  "2.2.3": [
+    [2, 1],
+    [0, 3],
+  ],
+  "2.2.4": [[2], [0, 1, 3]],
 };
+/**
+ * Republican Constitutionalist: 0
+ * Libertarian Individualist: 1
+ * Progressive Democrat: 2
+ * Plutocratic Nationalist: 3
+ */
+
 const q3IdtoPoints = {
   "3.1": [
     [2, 3, 5],
@@ -106,11 +116,11 @@ const q3IdtoPoints = {
   "3.5": [[2, 0, 7, 1], [2, 0, 7, 1], [6], [4, 3, 5], [4, 3, 5]],
   "3.6": [[4, 3, 5], [4, 3, 5], [6], [2, 0, 7, 1], [2, 0, 7, 1]],
   "3.7": [
+    [2, 3, 7],
+    [2, 3, 7],
     [6, 5],
     [6, 5],
     [0, 4, 1],
-    [2, 3, 7],
-    [2, 3, 7],
   ],
   "3.8": [[2, 0, 7, 1], [2, 0, 7, 1], [6], [4, 3, 5], [4, 3, 5]],
   "3.9": [[7], [7], [6, 0, 3, 1], [2, 4, 5], [2, 4, 5]],
@@ -141,7 +151,7 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
 
   const q1Score: number[] = [];
   const q21Score: number[] = [];
-  const q22Score: number[] = [];
+  const q22Score: number[] = [0, 0, 0, 0];
   const q3Score: number[] = [0, 0, 0, 0, 0, 0, 0, 0];
   for (const [key, value] of Object.entries(selectionsJSON) as [string, string][]) {
     if (key.match(/^1\./)) {
@@ -149,7 +159,10 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
     } else if (key.match(/^2.1\./)) {
       q21Score.push(q21IdtoPoints[key][parseInt(value)]);
     } else if (key.match(/^2.2\./)) {
-      q22Score.push(q22IdtoPoints[key][parseInt(value)]);
+      const indicesToInc = q22IdtoPoints[key][parseInt(value)] as number[];
+      indicesToInc.forEach((ind) => {
+        q22Score[ind]++;
+      });
     } else if (key.match(/^3\./)) {
       const indicesToInc = q3IdtoPoints[key][parseInt(value)] as number[];
       indicesToInc.forEach((ind) => {
@@ -162,7 +175,7 @@ export const generateDescriptor = (selections: unknown, userId: string): Descrip
   const vector = [
     q1Score.reduce((a, b) => a + b, 0) / Math.max(q1Score.length, 1),
     q21Score.reduce((a, b) => a + b, 0),
-    q22Score.reduce((a, b) => a + b, 0),
+    q22Score.indexOf(Math.max(...q22Score)),
     q3Score.indexOf(Math.max(...q3Score)),
   ];
 
@@ -226,78 +239,211 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
   //console.log(descriptor.DescVector[3]);
 
   //groups people into one of eight groups based on x and y values (q1, q2.1)
-  var group = 8;
+  var group8 = 8;
 
-  if (-pi / 8 < angle && angle < pi / 8) {
-    group = 0;
+  if ((-pi / 8 < angle && angle >= 0) || (angle > pi && angle < pi / 8)) {
+    group8 = 0;
   } else if (pi / 8 <= angle && angle < (3 * pi) / 8) {
-    group = 1;
+    group8 = 1;
   } else if ((3 * pi) / 8 <= angle && angle < (5 * pi) / 8) {
-    group = 2;
+    group8 = 2;
   } else if ((5 * pi) / 8 <= angle && angle < (7 * pi) / 8) {
-    group = 3;
-  } else if ((7 * pi) / 8 <= angle && angle < (-7 * pi) / 8) {
-    group = 4;
+    group8 = 3;
+  } else if (((7 * pi) / 8 <= angle && angle < pi) || (angle < (-7 * pi) / 8 && angle > -pi)) {
+    group8 = 4;
   } else if ((-7 * pi) / 8 <= angle && angle < (-5 * pi) / 8) {
-    group = 5;
+    group8 = 5;
   } else if ((-5 * pi) / 8 <= angle && angle < (-3 * pi) / 8) {
-    group = 6;
+    group8 = 6;
   } else if ((-3 * pi) / 8 <= angle && angle < -pi / 8) {
-    group = 7;
+    group8 = 7;
   }
 
   if (x === 0 && y === 0) {
-    group = 8;
+    group8 = 8;
   }
 
-  console.log(`group: ${group}`);
+  console.log(`pi: ${pi}`);
+
+  console.log(`angle: ${angle}`);
+
+  console.log(`group8: ${group8}`);
+  console.log(`q3: ${q3}`);
 
   //check if it fits with the groups from by comparing to results form q3
-  if (group != q3) {
-    if (1 < group && group < 7) {
-      if (group + 1 === q3 || group - 1 === q3) {
-        group = q3;
+  if (group8 != q3) {
+    if (0 < group8 && group8 < 7) {
+      if (group8 + 1 === q3 || group8 - 1 === q3) {
+        group8 = q3;
       } else {
-        group = 8;
+        group8 = 8;
       }
     } else {
-      if ((group === 7 && q3 === 1) || (group === 1 && q3 === 7)) {
-        group = q3;
+      if ((group8 === 7 && q3 === 0) || (group8 === 1 && q3 === 0)) {
+        group8 = q3;
       } else {
-        group = 8;
+        group8 = 8;
       }
     }
   }
 
+  console.log(`group8: ${group8}`);
+
+  //groups people into one of four groups based on x and y values (q1, q2.1)
+  var group4 = 4;
+
+  if (0 <= angle && angle < pi / 2) {
+    group4 = 0;
+  } else if (pi / 2 <= angle && angle <= pi) {
+    group4 = 1;
+  } else if (-pi / 2 <= angle && angle < 0) {
+    group4 = 3;
+  } else if (-pi <= angle && angle < -pi / 2) {
+    group4 = 2;
+  }
+
+  console.log(`group4: ${group4}`);
+
+  if (x === 0 && y === 0) {
+    group4 = 4;
+  }
+
+  console.log(`group4: ${group4}`);
+
+  //check if it fits with the groups from second part of q2
+  if (q2 != group4) {
+    if (1 < group4 && group4 < 3) {
+      if (group4 + 1 === q2 || group4 - 1 === q2) {
+      } else {
+        group4 = 4;
+      }
+    } else {
+      if ((group4 === 3 && q2 === 1) || (group4 === 1 && q2 === 1)) {
+      } else {
+        group4 = 4;
+      }
+    }
+  }
+
+  console.log(`q2: ${q2}`);
+
+  console.log(`group4: ${group4}`);
+
+  //check if the grouping into 4 and grouping into 8 work together
+  if (group4 === 0 && group8 != 8) {
+    if (group8 != 0 && group8 != 1 && group8 != 2) {
+      group4 = 4;
+      group8 = 8;
+    }
+  } else if (group4 === 1 && group8 != 8) {
+    if (group8 != 2 && group8 != 3 && group8 != 4) {
+      group4 = 4;
+      group8 = 8;
+    }
+  } else if (group4 === 2 && group8 != 8) {
+    if (group8 != 4 && group8 != 5 && group8 != 6) {
+      group4 = 4;
+      group8 = 8;
+    }
+  } else if (group4 === 3 && group8 != 8) {
+    if (group8 != 6 && group8 != 7 && group8 != 8) {
+      group4 = 4;
+      group8 = 8;
+    }
+  }
+
   // map the nummber to the name
-  if (group === 0) {
+  if (group4 === 0) {
+    if (group8 === 0) {
+      userPlacement.politicalName = "Republican Constitutionalist (Theoconservative)";
+      userPlacement.wing = "right";
+    } else if (group8 === 1) {
+      userPlacement.politicalName = "Republican Constitutionalist (Paleoconservative)";
+      userPlacement.wing = "right";
+    } else if (group8 === 2) {
+      userPlacement.politicalName = "Republican Constitutionalist (Paleolibertarian)";
+      userPlacement.wing = "right";
+    } else {
+      userPlacement.politicalName = "Republican Constitutionalist (Populist)";
+      userPlacement.wing = "right";
+    }
+  } else if (group4 === 1) {
+    if (group8 === 2) {
+      userPlacement.politicalName = "Libertarian Individualist (Paleolibertarian)";
+      userPlacement.wing = "right";
+    } else if (group8 === 3) {
+      userPlacement.politicalName = "Libertarian Individualist (Individualist)";
+      userPlacement.wing = "right";
+    } else if (group8 === 4) {
+      userPlacement.politicalName = "Libertarian Individualist (Radical)";
+      userPlacement.wing = "right";
+    } else {
+      userPlacement.politicalName = "Libertarian Individualist (Populist)";
+      userPlacement.wing = "right";
+    }
+  } else if (group4 === 2) {
+    if (group8 === 4) {
+      userPlacement.politicalName = "Progressive Democrat (Radical)";
+      userPlacement.wing = "right";
+    } else if (group8 === 5) {
+      userPlacement.politicalName = "Progressive Democrat (Progressive)";
+      userPlacement.wing = "right";
+    } else if (group8 === 6) {
+      userPlacement.politicalName = "Progressive Democrat (Communitarian)";
+      userPlacement.wing = "right";
+    } else {
+      userPlacement.politicalName = "Progressive Democrat (Populist)";
+      userPlacement.wing = "right";
+    }
+  } else if (group4 === 3) {
+    if (group8 === 6) {
+      userPlacement.politicalName = "Plutocratic Nationalist (Communitarian)";
+      userPlacement.wing = "right";
+    } else if (group8 === 7) {
+      userPlacement.politicalName = "Plutocratic Nationalist (Neoconservative)";
+      userPlacement.wing = "right";
+    } else if (group8 === 0) {
+      userPlacement.politicalName = "Plutocratic Nationalist (Theoconservative)";
+      userPlacement.wing = "right";
+    } else {
+      userPlacement.politicalName = "Plutocratic Nationalist (Populist)";
+      userPlacement.wing = "right";
+    }
+  } else if (group4 === 4) {
+    userPlacement.politicalName = "Populist";
+    userPlacement.wing = "right";
+  }
+
+  /**
+  if (group8 === 0) {
     userPlacement.politicalName = "Theoconservative";
     userPlacement.wing = "right";
-  } else if (group === 1) {
+  } else if (group8 === 1) {
     userPlacement.politicalName = "Paleoconservative";
     userPlacement.wing = "right";
-  } else if (group === 2) {
+  } else if (group8 === 2) {
     userPlacement.politicalName = "Paleolibertarian";
     userPlacement.wing = "right";
-  } else if (group === 3) {
+  } else if (group8 === 3) {
     userPlacement.politicalName = "Individualist";
     userPlacement.wing = "right";
-  } else if (group === 4) {
+  } else if (group8 === 4) {
     userPlacement.politicalName = "Radical";
     userPlacement.wing = "left";
-  } else if (group === 5) {
+  } else if (group8 === 5) {
     userPlacement.politicalName = "Progressive";
     userPlacement.wing = "left";
-  } else if (group === 6) {
+  } else if (group8 === 6) {
     userPlacement.politicalName = "Communitarian";
     userPlacement.wing = "left";
-  } else if (group === 7) {
+  } else if (group8 === 7) {
     userPlacement.politicalName = "Neoconservative";
     userPlacement.wing = "right";
   } else {
     userPlacement.politicalName = "Populist";
     userPlacement.wing = "right";
-  }
+  }  */
+
   return {
     politicalName: userPlacement.politicalName,
     suggestions: await generateSuggestions(userPlacement),

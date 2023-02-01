@@ -407,7 +407,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.2",
@@ -416,7 +416,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.3",
@@ -425,7 +425,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.4",
@@ -434,7 +434,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.5",
@@ -443,7 +443,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.6",
@@ -452,7 +452,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.7",
@@ -461,7 +461,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.8",
@@ -470,7 +470,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
       {
         id: "3.9",
@@ -479,7 +479,7 @@ export class TestObject implements TestInterface {
         min: 0,
         max: 4,
         step: 1,
-        default: 1,
+        default: 0,
       },
     ];
     return Promise.resolve(tests);
