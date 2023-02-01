@@ -14,31 +14,27 @@ const Main = (props: Props) => {
   // the test button is shown when the user is logged in
   return (
     <>
-      {/* <div>
-        <title>Depolarizer</title>
-      </div> */}
       <div className="background body">
-        <h1 className="titleBox">Depolarizer</h1>
-        <section className="missionBox">
-          <h3>
-            Our mission is to assess your political views through a test and provide a platform for you to access news sources that present opposing
-            viewpoints, fostering critical thinking and informed discourse.
-          </h3>
-        </section>
-        <section className="box">
+        <div className="mainGrid">
+          <section className="missionBox">
+            <h3>
+              Our mission is to assess your political views through a test and provide a platform for you to access news sources that present opposing
+              viewpoints, fostering critical thinking and informed discourse.
+            </h3>
+          </section>
           <div className="smallBox">
             <h4>To read more about our test and how our algorithm works press learn more.</h4>
             <Link to="/learnmore">
-              <button className="button">LEARN MORE</button>
+              <button className="redirect">LEARN MORE</button>
             </Link>
           </div>
           <div className="smallBox">
             <h4>In order to figure out your political type take the test.</h4>
             <Link to="/test">
-              <button className="button">TAKE TEST</button>
+              <button className="redirect">TAKE TEST</button>
             </Link>
           </div>
-        </section>
+        </div>
       </div>
     </>
   );

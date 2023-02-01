@@ -4,19 +4,37 @@
 
 @import url("./utils.css");
 
-.paragraph {
-  margin: 1rem;
-  text-align: justify;
-  color: var(--text-color-secondary);
-}
-
-.box {
+.mainGrid {
   display: grid;
-  align-self: center;
-  grid-template-columns: minmax(200px, 1fr) minmax(200px, 1fr);
-  grid-gap: clamp(0.5rem, 0.7rem, 2rem);
-  text-align: justify;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto auto;
+  grid-template-areas: "main";
+  grid-gap: 1rem;
   margin: 1rem;
+}
+.missionBox {
+  background-color: var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: var(--text-color-primary);
+
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+.smallBox {
+  background-color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: var(--text-color-primary);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .titleBox {
@@ -28,23 +46,33 @@
   color: var(--text-color-primary);
 }
 
-.missionBox {
-  background-color: var(--secondary-color);
-  padding: 1rem;
-  margin: 1rem;
+.redirect {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  color: var(--text-color-primary);
+  border: 1px solid var(--secondary-color);
+  background-color: var(--depolariser-orange);
+
+  transition: opacity 0.2s;
+  cursor: pointer;
+
+  font-size: 0.7rem;
+  flex-grow: 1;
 }
 
-.smallBox {
-  background-color: var(--secondary-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  color: var(--text-color);
+.redirect:hover {
+  background-color: var(--depolariser-orange-light);
 }
 
-.button {
-  background-color: var(--tertiary-color);
-  border-radius: 0.5rem;
-  color: var(--text-color);
+@media screen and (min-width: 768px) {
+  .mainGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "main main";
+  }
+  .missionBox {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }

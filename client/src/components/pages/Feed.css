@@ -1,5 +1,15 @@
 @import url("./utils.css");
 
+.infoIcon {
+  display: block;
+  width: 25px;
+  height: 25px;
+  grid-area: icon;
+
+  justify-self: end;
+  margin: 0.5rem;
+}
+
 .resultText {
   font-size: 1rem;
   font-weight: 300;
@@ -18,11 +28,59 @@ a {
 .pCardContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto 1fr 1fr 1fr;
+  grid-template-rows: repeat(5, auto);
   grid-gap: 0.5rem;
   margin-bottom: 1rem;
 }
-/* Box shadow to bottom and right*/
+
+.suggestionDesc {
+  padding: 0.5rem;
+  grid-area: icon;
+  display: none;
+
+  font-size: medium;
+}
+
+.suggestionDesc::before {
+  content: "Summary: ";
+  font-weight: 600;
+}
+
+.disp {
+  display: block;
+}
+
+.noDisp {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .inactive {
+    opacity: 0;
+    filter: blur(1rem);
+    transform: translateX(-100%);
+  }
+  .s-inactive {
+    opacity: 0;
+    filter: blur(1rem);
+    transform: translateX(-100%);
+  }
+}
+
+.active {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+  transition: opacity 0.2s, filter 0.2s, transform 0.2s;
+}
+
+.s-active {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0);
+  transition: opacity 0.4s, filter 0.4s, transform 0.4s;
+}
+
 .primaryCard {
   border-radius: 0.5rem;
   background-color: var(--primary-color);
@@ -30,6 +88,7 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto;
+  grid-template-areas: "icon";
 
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
 }
@@ -51,6 +110,7 @@ a {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr;
+  grid-template-areas: ". icon";
 }
 
 .suggestionTitle {
@@ -118,6 +178,19 @@ a {
 @media screen and (min-width: 768px) {
   /* Reset anything with wide class */
 
+  .infoIcon {
+    display: none;
+  }
+  .primaryCard:hover > .infoIcon {
+    display: block;
+  }
+
+  .inactive {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+  }
+
   .pCardContainer {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto 1fr;
@@ -154,6 +227,7 @@ a {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
+    grid-template-areas: "icon";
   }
 
   .wide .suggestionImg,

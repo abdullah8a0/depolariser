@@ -1,75 +1,80 @@
 @import url("./utils.css");
 
-.background {
-  background-color: var(--background-color);
-}
-
-.paragraph {
-  margin: 1rem;
-  text-align: justify;
-  color: var(--text-color);
-}
-
-.box {
+.boxWrapper-1 {
   display: grid;
-  align-self: center;
-  grid-template-columns: minmax(200px, 1fr) minmax(200px, 1fr);
-  grid-gap: clamp(0.5rem, 0.7rem, 2rem);
-  text-align: justify;
-}
-/**
-.titleBox {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
   background-color: var(--primary-color);
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  box-sizing: content-box;
-  text-align: center;
-}
-*/
+  grid-gap: 0.5rem;
 
-.titleBox {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0rem 0.5rem 0.5rem 0.5rem;
+}
+
+.boxTitle {
+  margin: 0;
+  color: var(--depolariser-orange);
+  border-radius: 0.5rem;
+}
+
+h4 {
+  margin-bottom: 0.5rem;
+}
+
+.content {
+  margin: 0;
+  color: var(--text-color-secondary);
+}
+
+.boxWrapper-2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, auto);
   background-color: var(--primary-color);
-  padding: 1rem;
+  grid-gap: 0.5rem;
+
   margin: 1rem;
-  border-radius: 0.5rem;
-  /**text-align: center;*/
+  padding: 1rem;
+  border-radius: 0rem 0.5rem 0.5rem 0.5rem;
 }
 
-.secondBox {
-  background-color: var(--tertiary-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
+.boxWrapper-2 > .content {
+  grid-column-start: 1;
+  grid-column-end: 5;
 }
 
-.firstBox {
-  background-color: var(--secondary-color);
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
+.four-way-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  background-color: var(--primary-color);
+  grid-gap: 0.5rem;
 
-/**
-.turquiseBox {
-  background-color: var(--tertiary-color);
-  padding: 1rem;
   margin: 1rem;
-  flex: 1;
-  text-align: justify;
-  border-radius: 0.5rem;
-  min-width: 10rem;
+  padding: 1rem;
+  border-radius: 0rem 0.5rem 0.5rem 0.5rem;
 }
 
-.yellowBox {
-  background-color: var(--secondary-color);
-  padding: 1rem;
-  margin: 1rem;
-  flex: 1;
-  text-align: justify;
+.four-way-card > .smallTitle {
+  margin: 0;
+  color: var(--depolariser-orange);
   border-radius: 0.5rem;
-  /**grid-auto-rows: 1fr;
-}*/
+}
 
-.smallTitle {
-  color: var(--text-color);
-  text-align: center;
+.four-way-card > .content {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.boxWrapper-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  background-color: var(--primary-color);
+  grid-gap: 0.5rem;
+
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0rem 0.5rem 0.5rem 0.5rem;
 }

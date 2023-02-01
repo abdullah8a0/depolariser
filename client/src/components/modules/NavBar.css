@@ -144,4 +144,8 @@ button.NavBar-hamburger-toggle {
 
     color: var(--depolariser-orange);
   }
+
+  .Router-link:hover {
+    color: var(--depolariser-orange-light);
+  }
 }

@@ -3,6 +3,7 @@
 :root {
   --background-color: #ffffff;
   --text-color-primary: #272727;
+  --text-color-secondary: #979797;
 
   --primary-color: #ffffff;
   --secondary-color: grey;
@@ -12,6 +13,7 @@
 
   --depolariser-orange: hsl(38, 87%, 53%);
   --depolariser-orange-light: hsl(38, 87%, 63%);
+  --depolariser-orange-dark: hsl(38, 87%, 40%);
 
   background-color: var(--background-color);
   color: var(--secondary-color);
@@ -61,4 +63,9 @@
 
 .u-secondarycolor {
   color: var(--secondary-color);
+}
+
+em {
+  font-style: unset;
+  color: var(--depolariser-orange);
 }

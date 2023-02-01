@@ -9,12 +9,6 @@ const JSDOM = require("jsdom").JSDOM;
  * @param {string} body - The body of the article to summarise.
  */
 async function summarise(body: string): Promise<string> {
-  console.log("summarise called");
-  return new Promise((resolve) => {
-    setTimeout(async () => {
-      resolve(body.slice(0, 100));
-    });
-  });
   const url = "https://api.meaningcloud.com/summarization-1.0";
   const lisence = "d3c0989919888bffbbb4271e5810ae14";
   console.log(`summarising: ${body.slice(0, 100)}`);

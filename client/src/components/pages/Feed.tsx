@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { post } from "../../utilities";
 import img from "../NoImg.png";
+import info from "../info.png";
 import "./Feed.css";
 import { RouteComponentProps } from "@reach/router";
 import { InfoCard } from "../../../../shared/common";
+
+function isElementInViewport(el: HTMLElement) {
+  const rect = el.getBoundingClientRect();
+  return rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+}
 
 function layoutSuggestions(suggestions: InfoCard[]) {
   const completeCards: InfoCard[] = [];
@@ -31,18 +37,30 @@ function layoutSuggestions(suggestions: InfoCard[]) {
 
   return (
     <>
-      <div className="pCardContainer">
+      <div className={`pCardContainer`}>
         {primaryCards.map((card, i) => (
-          <a href={card.url} className={`primaryCard u-textcolmain ${i >= 3 ? "wide" : ""} `} id={`pCard-${i}`} key={i}>
-            <img className="suggestionImg" src={card.img} />
+          <a href={card.url} id={`pCard-${i}`} className={`primaryCard u-textcolmain inactive ${i >= 3 ? "wide" : ""}`} key={i}>
+            <div className="suggestionDesc">{card.desc}</div>
+            <img className="suggestionImg" src={card.img === "NoImg" ? img : card.img} alt="suggestion" />
+
             <div className="suggestionTitle">{card.title}</div>
-            {/* <div className="suggestionDesc u-textcolsec">{suggestion.desc} </div> */}
+            <img
+              src={info}
+              className="infoIcon"
+              alt="get summary"
+              onClick={(event) => {
+                event.preventDefault();
+                // display the description
+                document.getElementsByClassName("suggestionDesc")[i].classList.toggle("disp");
+                document.getElementsByClassName("suggestionImg")[i].classList.toggle("noDisp");
+              }}
+            />
           </a>
         ))}
       </div>
       <div className="npCardContainer">
         {nonPrimaryCards.map((card, i) => (
-          <div className="nonPrimaryCard" key={i} id={`npCard-${i}`}>
+          <div className="nonPrimaryCard s-inactive" key={i} id={`npCard-${i}`}>
             <a href={card.url}>
               <div className="suggestionTitle u-textcolmain">{card.title}</div>
             </a>
@@ -65,7 +83,9 @@ const displayResult = async (userId: string) => {
   const serverData = await post("/api/results", { userId: userId, testObj: testObj }).then((res) => {
     return (
       <>
-        <p className="resultText">Based on your answers, you are a {res.results.politicalName}.</p>
+        <p className="resultText">
+          Based on your answers, you are a <em>{res.results.politicalName}</em>.
+        </p>
         <p className="resultText">Here are some news sources that you might read to learn more about what other people think.</p>
         <div className="suggestionsContainer">{layoutSuggestions(res.results.suggestions)}</div>
       </>
@@ -87,17 +107,62 @@ const Results = (props: Props) => {
     }
   }, [userId]);
 
+  // forces the cards to animate when they are in the viewport at the start
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      const cards = document.getElementsByClassName("primaryCard");
+      for (let i = 0; i < cards.length; i++) {
+        const card = cards[i] as HTMLElement;
+        if (isElementInViewport(card)) {
+          card.classList.remove("inactive");
+          card.classList.add("active");
+        }
+      }
+
+      const npCards = document.getElementsByClassName("nonPrimaryCard");
+      for (let i = 0; i < npCards.length; i++) {
+        const card = npCards[i] as HTMLElement;
+        if (isElementInViewport(card)) {
+          card.classList.remove("s-inactive");
+          card.classList.add("s-active");
+        }
+      }
+    });
+  }, []);
+
   if (!userId) {
     return <></>;
   }
 
   const [result, setResult] = useState<JSX.Element>(<></>);
 
+  // fetch the results from the server
   useEffect(() => {
     displayResult(userId!).then((result) => {
       setResult(result);
     });
   }, []);
+
+  // used to check if the element is in the viewport, animate the cards when they are
+  useEffect(() => {
+    const cards = document.getElementsByClassName("primaryCard");
+    for (let i = 0; i < cards.length; i++) {
+      const card = cards[i] as HTMLElement;
+      if (isElementInViewport(card)) {
+        card.classList.remove("inactive");
+        card.classList.add("active");
+      }
+    }
+
+    const npCards = document.getElementsByClassName("nonPrimaryCard");
+    for (let i = 0; i < npCards.length; i++) {
+      const card = npCards[i] as HTMLElement;
+      if (isElementInViewport(card)) {
+        card.classList.remove("s-inactive");
+        card.classList.add("s-active");
+      }
+    }
+  }, [result]);
 
   return <>{result}</>;
 };

@@ -11,14 +11,19 @@ const displayTest = async (tester: TestObject) => {
   const testScales = tests.filter((test) => test.props.test.type === "scale");
   return (
     <>
-      <p className="testTitle">Select which news sources do you usually read</p>
+      <p className="titleStatement">
+        The following questions are designed to help us determine your news feed. Answer as many as you can for the best results and press
+        <em> submit</em>.
+      </p>
+      <p className="testTitle">Select some news sources you usually read</p>
       <div className="testBoolContainer">{testBools}</div>
       <p className="testTitle">Select the statements you agree with the most?</p>
       <div className="testOptionContainer">{testOptions}</div>
-      <p className="testTitle">How much do you agree with the following statements?</p>
+      <p className="testTitle">Where would you place yourself on the following scale?</p>
       <div className="testScaleContainer">{testScales}</div>
       <Link to="/feed">
         <button
+          className="testSubmit"
           onClick={() => {
             tester.save();
           }}
