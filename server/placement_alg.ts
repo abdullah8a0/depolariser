@@ -370,30 +370,30 @@ export const fecthResults = async (descriptor: DescriptorInterface): Promise<any
   } else if (group4 === 1) {
     if (group8 === 2) {
       userPlacement.politicalName = "Libertarian Individualist (Paleolibertarian)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     } else if (group8 === 3) {
       userPlacement.politicalName = "Libertarian Individualist (Individualist)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     } else if (group8 === 4) {
       userPlacement.politicalName = "Libertarian Individualist (Radical)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     } else {
       userPlacement.politicalName = "Libertarian Individualist (Populist)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     }
   } else if (group4 === 2) {
     if (group8 === 4) {
       userPlacement.politicalName = "Progressive Democrat (Radical)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     } else if (group8 === 5) {
       userPlacement.politicalName = "Progressive Democrat (Progressive)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     } else if (group8 === 6) {
       userPlacement.politicalName = "Progressive Democrat (Communitarian)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     } else {
       userPlacement.politicalName = "Progressive Democrat (Populist)";
-      userPlacement.wing = "right";
+      userPlacement.wing = "left";
     }
   } else if (group4 === 3) {
     if (group8 === 6) {
