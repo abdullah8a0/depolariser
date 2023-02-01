@@ -18,18 +18,25 @@ const Main = (props: Props) => {
         <div className="mainGrid">
           <section className="missionBox u-addShadow">
             <h3>
-              Our mission is to assess your political views through a test and provide a platform for you to access news sources that present opposing
-              viewpoints, fostering critical thinking and informed discourse.
+              Depolarizer is designed to figure out your political perspective and then to suggest news articles and sources which generally cater to
+              people with opposing viewpoints. Overall, Depolarizer aims to foster a safe environment to increase the array of news sources read by
+              the general public and foster critical thinking and informed discourse.
             </h3>
           </section>
           <div className="smallBox u-addShadow">
-            <h4>To read more about our test and how our algorithm works press learn more.</h4>
+            <h4>
+              More information on the website, such as the theory behind the different political perspectives, and the news sources that are suggested
+              can be found in the Learn More page.
+            </h4>
             <Link to="/learnmore">
               <button className="redirect">LEARN MORE</button>
             </Link>
           </div>
           <div className="smallBox u-addShadow">
-            <h4>In order to figure out your political type take the test.</h4>
+            <h4>
+              The test will assign you a political perspective based on your political views, as understood by the different questions. To figure out
+              your political perspective take the test.
+            </h4>
             <Link to="/test">
               <button className="redirect">TAKE TEST</button>
             </Link>
