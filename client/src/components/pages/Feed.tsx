@@ -33,9 +33,9 @@ function layoutSuggestions(suggestions: InfoCard[]) {
     <>
       <div className="pCardContainer">
         {primaryCards.map((card, i) => (
-          <a href={card.url} className={`primaryCard ${i >= 3 ? "wide" : ""} `} id={`pCard-${i}`} key={i}>
+          <a href={card.url} className={`primaryCard u-textcolmain ${i >= 3 ? "wide" : ""} `} id={`pCard-${i}`} key={i}>
             <img className="suggestionImg" src={card.img} />
-            <div className="suggestionTitle u-textcolmain">{card.title}</div>
+            <div className="suggestionTitle">{card.title}</div>
             {/* <div className="suggestionDesc u-textcolsec">{suggestion.desc} </div> */}
           </a>
         ))}

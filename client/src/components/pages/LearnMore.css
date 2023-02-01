@@ -10,30 +10,12 @@
   color: var(--text-color);
 }
 
-/**
-.testBoolContainer {
-  padding: 1rem;
-  display: grid;
-  align-self: center;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%/3, 200px), 1fr));
-  grid-gap: clamp(0.5rem, 0.7rem, 2rem);
-}
-*/
-
 .box {
   display: grid;
   align-self: center;
   grid-template-columns: minmax(200px, 1fr) minmax(200px, 1fr);
   grid-gap: clamp(0.5rem, 0.7rem, 2rem);
   text-align: justify;
-
-  /**
-  display: flex;
-  flex-direction: wrap;
-  flex-basis: auto;
-  align-items: center;
-  justify-content: stretch;
-  */
 }
 /**
 .titleBox {

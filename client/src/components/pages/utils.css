@@ -1,14 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 :root {
-  --background-color: white;
-  --text-color-primary: lightgrey;
+  --background-color: #ffffff;
+  --text-color-primary: #272727;
 
-  --primary-color: darkgrey;
+  --primary-color: #ffffff;
   --secondary-color: grey;
   --tertiary-color: black;
   --hover-color: lightgrey;
   --secondary-hover-color: darkgrey;
+
+  --depolariser-orange: hsl(38, 87%, 53%);
+  --depolariser-orange-light: hsl(38, 87%, 63%);
+
   background-color: var(--background-color);
   color: var(--secondary-color);
   font-family: "Roboto", sans-serif;
@@ -26,6 +30,8 @@
     --tertiary-color: white;
     --hover-color: darkgrey;
     --secondary-hover-color: grey;
+
+    color: var(--secondary-color);
   }
 }
 
@@ -35,6 +41,14 @@
 
 .u-textcolmain {
   color: var(--text-color-primary);
+}
+
+.u-textcolmain:hover {
+  color: var(--depolariser-orange);
+}
+
+.u-depoorange {
+  color: var(--depolariser-orange);
 }
 
 .u-textcolsec {

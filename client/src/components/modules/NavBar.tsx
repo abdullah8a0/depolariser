@@ -53,7 +53,7 @@ const NavBar = (props: NavBarProps) => {
       </div>
 
       <div className="NavBar-hamburger-wrapper">
-        <div className="NavBar-hamburger">
+        <div className="NavBar-hamburger u-depoorange">
           <button
             className="NavBar-hamburger-toggle"
             type="button"

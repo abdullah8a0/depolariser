@@ -22,7 +22,7 @@ a {
   grid-gap: 0.5rem;
   margin-bottom: 1rem;
 }
-
+/* Box shadow to bottom and right*/
 .primaryCard {
   border-radius: 0.5rem;
   background-color: var(--primary-color);
@@ -30,6 +30,8 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto;
+
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .primaryCard[id="pCard-0"] {
@@ -63,14 +65,18 @@ a {
 
 .suggestionImg {
   width: 100%;
-  height: 100%;
+  height: 132px;
   object-fit: cover;
-  border-radius: 0.5rem 0.5rem 0rem 0rem;
+  border-radius: 0.5rem 0rem 0rem 0rem;
 
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
+}
+
+.primaryCard[id="pCard-0"] .suggestionImg {
+  height: 100%;
 }
 
 .wide .suggestionImg {
@@ -84,6 +90,8 @@ a {
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
+
+  justify-self: right;
 }
 
 .wide .suggestionTitle {
@@ -96,36 +104,91 @@ a {
   line-height: 16px;
 }
 
-.suggestionDesc {
-  padding: 0.5rem;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 3;
-  grid-row-end: 4;
+/* 1 pixel vertical line */
+.nonPrimaryCard {
+  border-top: 1px solid var(--secondary-color);
+}
+
+.primaryCard:hover {
+  cursor: pointer;
+  color: var(--depolariser-orange);
+  /* background-color: var(--secondary-color); */
 }
 
 @media screen and (min-width: 768px) {
-  .suggestionCard {
-    grid-template-columns: 1fr 4fr;
-    grid-template-rows: minmax(auto, 1fr) 2fr;
-  }
-  .suggestionImg {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 3;
+  /* Reset anything with wide class */
+
+  .pCardContainer {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
   }
 
-  .suggestionTitle {
-    grid-column-start: 2;
+  .primaryCard {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .primaryCard[id="pCard-0"] {
+    grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
   }
+  .primaryCard[id="pCard-1"] {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
 
-  .suggestionDesc {
-    grid-column-start: 2;
-    grid-column-end: 3;
+  .primaryCard.wide {
+    border-radius: 0.5rem;
+    background-color: var(--primary-color);
+    grid-column-start: unset;
+    grid-column-end: unset;
+    grid-row-start: unset;
+    grid-row-end: unset;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+
+  .wide .suggestionImg,
+  .suggestionImg {
+    width: 100%;
+    height: 132px;
+    object-fit: cover;
+    margin: 0;
+    border-radius: 0.5rem 0rem 0rem 0rem;
+
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+  }
+
+  .wide .suggestionTitle,
+  .suggestionTitle {
+    padding: 0.5rem;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    font-size: medium;
+  }
+
+  .primaryCard[id="pCard-0"] .suggestionImg,
+  .primaryCard[id="pCard-1"] .suggestionImg {
+    height: 100%;
+  }
+
+  .suggestionTitle {
+    grid-column-start: 1;
+    grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
   }

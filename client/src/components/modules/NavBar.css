@@ -1,15 +1,13 @@
 /*  Mobile-first design. So hamburger menu is default*/
-
+@import url("../pages/utils.css");
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: var(--primary-color);
   padding: 0 1rem;
   height: 4rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-
-  --depolariser-orange: hsl(38, 87%, 53%);
 }
 .NavBar-links {
   display: none;
@@ -23,6 +21,10 @@ nav {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--depolariser-orange);
+}
+
+.NavBar-title:hover {
+  color: var(--depolariser-orange-light);
 }
 
 .Router-link {
@@ -48,19 +50,26 @@ nav {
   height: 100%;
 }
 
+button.NavBar-hamburger-toggle {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
 .NavBar-hamburger-toggle {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100%;
-}
+  height: 35px;
 
+  cursor: pointer;
+}
 .NavBar-hamburger-line {
   width: 100%;
-  height: 2px;
-  background-color: #333;
+  height: 5px;
+  background-color: var(--depolariser-orange);
 }
 
 .NavBar-hamburger-dropdown {
@@ -68,7 +77,7 @@ nav {
   top: 4rem;
   right: 0;
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: var(--depolariser-orange);
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
   z-index: 999;
 }
@@ -81,7 +90,7 @@ nav {
 }
 
 .NavBar-hamburger-dropdown a:hover {
-  background-color: #e5e5e5;
+  background-color: var(--depolariser-orange-light);
 }
 
 .NavBar-hamburger-dropdown[aria-hidden="true"] {
@@ -93,7 +102,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f5f5f5;
+    background-color: var(--primary-color);
     padding: 0 1rem;
     height: 4rem;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
@@ -108,7 +117,6 @@ nav {
 
   .NavBar-links a {
     text-decoration: none;
-    color: #333;
     font-size: 1rem;
     font-weight: 700;
   }
@@ -133,5 +141,7 @@ nav {
   .Router-link {
     text-decoration: none;
     color: inherit;
+
+    color: var(--depolariser-orange);
   }
 }
