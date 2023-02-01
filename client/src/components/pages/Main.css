@@ -4,14 +4,10 @@
 
 @import url("./utils.css");
 
-.background {
-  background-color: var(--background-color);
-}
-
 .paragraph {
   margin: 1rem;
   text-align: justify;
-  color: var(--text-color);
+  color: var(--text-color-secondary);
 }
 
 .box {
@@ -29,7 +25,7 @@
   margin: 1rem;
   border-radius: 0.5rem;
   text-align: center;
-  color: var(--text-color);
+  color: var(--text-color-primary);
 }
 
 .missionBox {
@@ -37,7 +33,7 @@
   padding: 1rem;
   margin: 1rem;
   border-radius: 0.5rem;
-  color: var(--text-color);
+  color: var(--text-color-primary);
 }
 
 .smallBox {

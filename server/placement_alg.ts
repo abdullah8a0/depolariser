@@ -1,9 +1,9 @@
 import Descriptor from "./models/Descriptor";
 import DescriptorInterface from "../shared/Descriptor";
 import { assert } from "console";
-import { parseCNN, parseFOX, InfoCard } from "./scrape";
+import { parseCNN, parseFOX } from "./scrape";
 import Card from "./models/Card";
-import CardInterface from "../shared/Card";
+import { InfoCard } from "../shared/common";
 
 /* A function that takes in a string and a userId and returns a DescriptorInterface.
  * The string is the user's selections from the test.

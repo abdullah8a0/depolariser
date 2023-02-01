@@ -1,10 +1,6 @@
 // use jsdom to parse HTML
-export type InfoCard = {
-  title: string;
-  url: string;
-  img: string;
-  desc: string;
-};
+import { InfoCard } from "../shared/common";
+const SUMMARISER_DELAY = 0;
 const JSDOM = require("jsdom").JSDOM;
 /**
  * It takes a body of text and returns a summary of the text.
@@ -13,6 +9,12 @@ const JSDOM = require("jsdom").JSDOM;
  * @param {string} body - The body of the article to summarise.
  */
 async function summarise(body: string): Promise<string> {
+  console.log("summarise called");
+  return new Promise((resolve) => {
+    setTimeout(async () => {
+      resolve(body.slice(0, 100));
+    });
+  });
   const url = "https://api.meaningcloud.com/summarization-1.0";
   const lisence = "d3c0989919888bffbbb4271e5810ae14";
   console.log(`summarising: ${body.slice(0, 100)}`);
@@ -73,6 +75,7 @@ async function fallbackSummarise(body: string): Promise<string> {
 }
 
 async function parseCNN(category: string): Promise<InfoCard[]> {
+  console.log("parsing CNN");
   const fecthBody = async (url: string): Promise<string> => {
     const res = await fetch("https://www.cnn.com" + url).then((res) => res.text());
     const { window } = new JSDOM();
@@ -113,12 +116,12 @@ async function parseCNN(category: string): Promise<InfoCard[]> {
     .map(async (card, i) => {
       // set timeout to avoid being blocked by the server for too many requests
       // timeout is set to 1s*index.
-      let desc: string = await fecthBody(card.url).then(
+      const desc: string = await fecthBody(card.url).then(
         (body) =>
           new Promise((resolve) => {
             setTimeout(() => {
               resolve(summarise(body));
-            }, 1000 * i);
+            }, SUMMARISER_DELAY * i);
           })
       );
 
@@ -173,7 +176,7 @@ async function parseFOX(category: string): Promise<InfoCard[]> {
           new Promise((resolve) => {
             setTimeout(() => {
               resolve(summarise(body));
-            }, 1000 * i);
+            }, SUMMARISER_DELAY * i);
           })
       );
       return { title: card.title, url: `https://www.foxnews.com${card.url}`, img: card.img, desc: desc };
@@ -181,4 +184,74 @@ async function parseFOX(category: string): Promise<InfoCard[]> {
   return Promise.all(promisedDescCards);
 }
 
-export { parseCNN, parseFOX };
+async function parseAPP(category: string): Promise<InfoCard[]> {
+  const BASE_URL = "https://www.apnews.com";
+  const fecthBody = async (url: string): Promise<string> => {
+    const res = await fetch(BASE_URL + url).then((res) => res.text());
+    const { window } = new JSDOM();
+    const { document } = window;
+    document.body.innerHTML = res;
+    const body = document.querySelectorAll("div.Article > p.p");
+
+    const innerText = Array.from(body)
+      .map((p) => {
+        return (p as HTMLElement).textContent;
+      })
+      .join(" ");
+    // remove extra spaces
+    return innerText.replace(/\s\s+/g, " ");
+  };
+  const APPress = BASE_URL + "/hub/" + category;
+  // find h2.title 's child a in the response HTML
+  const res = await fetch(APPress).then((res) => res.text());
+  const { window } = new JSDOM();
+  const { document } = window;
+  document.body.innerHTML = res;
+  const dataObject = res.match(/\nwindow\['titanium-state'\] = .*\n/)?.map((s) => s.trim());
+
+  // console.log(`matched: ${dataObject?.length} head: ${dataObject?.[0]}`);
+  const data = JSON.parse(dataObject![0].split("=")[1].trim() + "}");
+
+  console.log(JSON.stringify(data, null, 2));
+
+  const articles: NodeList = document.querySelectorAll("div.FeedCard");
+  const promisedDescCards = Array.from(articles)
+    .map((article: Node): InfoCard => {
+      const title = (article as HTMLElement).querySelector("div > a > h2");
+      const img = (article as HTMLElement).querySelector("a > div > img");
+      const link = (article as HTMLElement).querySelector("div > a");
+      console.log(`img: ${(article as HTMLElement).querySelector("div[data-key='media-placeholder']>img")?.getAttribute("src")}`);
+
+      const desc = "";
+      if (link && title) {
+        return { title: title?.textContent!, url: link.getAttribute("href")!, img: img ? img.getAttribute("src")! : "NoImg", desc };
+      }
+      return { title: title?.textContent!, url: "", img: "", desc: "" };
+    })
+    .filter((card) => {
+      return card.url.startsWith(`/article`);
+    })
+    .map(async (card: InfoCard, i: number): Promise<InfoCard> => {
+      // set timeout to avoid being blocked by the server for too many requests
+      // timeout is set to 1s*index.
+      let desc: string = await fecthBody(card.url).then(
+        (body) =>
+          new Promise((resolve) => {
+            setTimeout(() => {
+              resolve(summarise(body));
+            }, SUMMARISER_DELAY * i);
+          })
+      );
+      return { title: card.title, url: `https://www.apnews.com${card.url}`, img: card.img, desc: desc };
+    });
+  return Promise.all(promisedDescCards);
+}
+
+// politics news sources:
+
+// CNN: left
+// APP: (AP press) left leaning
+// BBC: center
+// WST: (Washington Times) right leaning
+// FOX: right
+export { parseCNN, parseFOX, parseAPP };

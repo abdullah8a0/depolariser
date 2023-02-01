@@ -1,13 +1,5 @@
 /*  Mobile-first design. So hamburger menu is default*/
-/*
-className="NavBar-hamburger-wrapper">
-className="NavBar-hamburger">
-className="NavBar-hamburger-toggle">
-className="NavBar-hamburger-line" />
-className="NavBar-hamburger-line" />
-className="NavBar-hamburger-line" />
-className="NavBar-hamburger-dropdown">
-*/
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -16,6 +8,8 @@ nav {
   padding: 0 1rem;
   height: 4rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+
+  --depolariser-orange: hsl(38, 87%, 53%);
 }
 .NavBar-links {
   display: none;
@@ -28,12 +22,12 @@ nav {
 .NavBar-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #333;
+  color: var(--depolariser-orange);
 }
 
 .Router-link {
   text-decoration: none;
-  color: #333;
+  color: inherit;
 }
 
 .NavBar-hamburger-wrapper {
@@ -126,7 +120,7 @@ nav {
   .NavBar-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #333;
+    color: var(--depolariser-orange);
   }
 
   .NavBar-login {
@@ -138,6 +132,6 @@ nav {
 
   .Router-link {
     text-decoration: none;
-    color: #333;
+    color: inherit;
   }
 }

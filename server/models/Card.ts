@@ -1,5 +1,5 @@
 import { Schema, model, Document } from "mongoose";
-import { InfoCard } from "../scrape";
+import { InfoCard } from "../../shared/common";
 
 const CardSchema = new Schema({
   date: String,

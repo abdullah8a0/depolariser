@@ -2,7 +2,8 @@
 
 :root {
   --background-color: white;
-  --text-color: lightgrey;
+  --text-color-primary: lightgrey;
+
   --primary-color: darkgrey;
   --secondary-color: grey;
   --tertiary-color: black;
@@ -12,4 +13,38 @@
   color: var(--secondary-color);
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1e1e1e;
+    --text-color-primary: #e0e0e0;
+    --text-color-secondary: #979797;
+
+    --primary-color: #323232;
+    --secondary-color: #8d8d8d;
+    --tertiary-color: white;
+    --hover-color: darkgrey;
+    --secondary-hover-color: grey;
+  }
+}
+
+.u-bgcolor {
+  background-color: var(--background-color);
+}
+
+.u-textcolmain {
+  color: var(--text-color-primary);
+}
+
+.u-textcolsec {
+  color: var(--text-color-secondary);
+}
+
+.u-primcolor {
+  color: var(--primary-color);
+}
+
+.u-secondarycolor {
+  color: var(--secondary-color);
 }

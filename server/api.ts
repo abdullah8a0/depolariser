@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import auth from "./auth";
-// import socketManager from "./server-socket";
+import { parseCNN, parseFOX, parseAPP } from "./scrape";
 import Descriptor from "./models/Descriptor";
 import { generateDescriptor, fecthResults } from "./placement_alg";
 const router = express.Router();
@@ -14,14 +14,6 @@ router.get("/whoami", (req: Request, res: Response) => {
   }
   res.send(req.user);
 });
-// router.post("/initsocket", (req: Request, res: Response) => {
-//   // do nothing if user not logged in
-//   if (req.user) {
-//     const socket = socketManager.getSocketFromSocketID(req.body.socketid);
-//     if (socket !== undefined) socketManager.addUser(req.user, socket);
-//   }
-//   res.send({});
-// });
 router.post("/results", async (req: Request, res: Response) => {
   // get the user's id
   if (!req.user) {
@@ -45,6 +37,30 @@ router.post("/results", async (req: Request, res: Response) => {
   // send the results tso the client
   res.send({ results: results });
   return;
+});
+
+router.get("/dev/:id", async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  switch (id) {
+    case "APP":
+      const APPCards = await parseAPP("politics");
+      res.send({ results: APPCards });
+      break;
+    case "CNN":
+      const CNNCards = await parseCNN("politics");
+      res.send({ results: CNNCards });
+      break;
+    case "FOX":
+      const FOXCards = await parseFOX("politics");
+      res.send({ results: FOXCards });
+      break;
+
+    default:
+      res.status(404).send({ msg: "Invalid dev id" });
+
+      break;
+  }
 });
 
 // anything else falls to this "not found" case
