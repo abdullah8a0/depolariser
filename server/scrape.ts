@@ -1,6 +1,6 @@
 // use jsdom to parse HTML
 import { InfoCard } from "../shared/common";
-const SUMMARISER_DELAY = 0;
+const SUMMARISER_DELAY = 5000;
 const JSDOM = require("jsdom").JSDOM;
 /**
  * It takes a body of text and returns a summary of the text.

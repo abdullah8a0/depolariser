@@ -3,6 +3,9 @@ import React from "react";
 import { RouteComponentProps } from "@reach/router";
 import "./LearnMore.css";
 
+import fourWay from "../4way.png";
+import eightWay from "../8way.png";
+
 type Props = RouteComponentProps & {
   userId?: string;
 };
@@ -10,12 +13,9 @@ type Props = RouteComponentProps & {
 const LearnMore = (props: Props) => {
   return (
     <>
-      <div className="boxWrapper-1">
-        <h2 className="boxTitle">What is it?</h2>
-
-        <h2 className="boxTitle">Why?</h2>
-
+      <div className="boxWrapper-1 u-addShadow">
         <div className="content">
+          <h2 className="boxTitle">What is it?</h2>
           <h4>
             Depolarizer is a website which is designed to figure out your political perspective and then to suggest news articles and sources which
             generally cater to people with opposing viewpoints. This website aims to foster a safe environment to increase the array of news sources
@@ -36,6 +36,7 @@ const LearnMore = (props: Props) => {
           </h4>
         </div>
         <div className="content">
+          <h2 className="boxTitle">Why?</h2>
           <h4>
             There is a growing divide between individuals with opposing political ideologies which leads to increasing hostility and lack of
             compromise between the two sides. Especially in recent years, this divide between liberals and conservatives has increased and political
@@ -61,7 +62,7 @@ const LearnMore = (props: Props) => {
         </div>
       </div>
       <h2 className="sectionHeading">Political Perspectives:</h2>
-      <div className="boxWrapper-2">
+      <div className="boxWrapper-2 u-addShadow">
         <div className="content">
           <h4 className="p">
             The chart below shows the four main traditions with the vertical axis as a scale of kratos/akrateia and a horizontal axis as a scale of
@@ -70,9 +71,10 @@ const LearnMore = (props: Props) => {
             government and the bottom favor towards the use of power by the government. The horizontal axis can be explained through the legitimacy of
             rank, more specifically the preference to live in a stratified society where people are taught to respect and obey their superiors, or an
             egalitarian society in which people are taught to treat everyone as equals. The left side of the chart rejects rank, while the right
-            accepts rank.
+            accepts rank. {"\n"}
           </h4>
         </div>
+        <img className="chart" src={fourWay} alt="4-way chart" />
         <div className="four-way-card">
           <h3 className="smallTitle">Republic Constitutionalism:</h3>
           <div className="content">
@@ -144,8 +146,9 @@ const LearnMore = (props: Props) => {
             character of this group other than opposition to the prevailing power.
           </h4>
         </div>
+        <img className="chart" src={eightWay} alt="8-way chart" />
       </div>
-      <div className="boxWrapper-3">
+      <div className="boxWrapper-3 u-addShadow">
         <div className="eight-way-card">
           <h3 className="smallTitle">Communitarian:</h3>
           <div className="content">
@@ -313,9 +316,6 @@ const LearnMore = (props: Props) => {
           </div>
         </div>
       </div>
-
-      <h2 className="titleBox">News Sources</h2>
-      <h4 className="firstBox paragraph"> The news sources we have used are below.</h4>
     </>
   );
 };

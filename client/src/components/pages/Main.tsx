@@ -16,19 +16,19 @@ const Main = (props: Props) => {
     <>
       <div className="background body">
         <div className="mainGrid">
-          <section className="missionBox">
+          <section className="missionBox u-addShadow">
             <h3>
               Our mission is to assess your political views through a test and provide a platform for you to access news sources that present opposing
               viewpoints, fostering critical thinking and informed discourse.
             </h3>
           </section>
-          <div className="smallBox">
+          <div className="smallBox u-addShadow">
             <h4>To read more about our test and how our algorithm works press learn more.</h4>
             <Link to="/learnmore">
               <button className="redirect">LEARN MORE</button>
             </Link>
           </div>
-          <div className="smallBox">
+          <div className="smallBox u-addShadow">
             <h4>In order to figure out your political type take the test.</h4>
             <Link to="/test">
               <button className="redirect">TAKE TEST</button>

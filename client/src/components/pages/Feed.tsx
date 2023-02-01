@@ -19,7 +19,7 @@ function layoutSuggestions(suggestions: InfoCard[]) {
   suggestions.forEach((suggestion) => {
     if (suggestion.img === "NoImg" || suggestion.img === "none") {
       imagelessCards.push(suggestion);
-    } else if (suggestion.desc === "" || suggestion.desc === "none" || suggestion.desc === "NoDesc") {
+    } else if (suggestion.desc === "" || suggestion.desc === "none" || suggestion.desc === "undefined") {
       desclessCards.push(suggestion);
     } else {
       completeCards.push(suggestion);
@@ -34,6 +34,10 @@ function layoutSuggestions(suggestions: InfoCard[]) {
   });
   const primaryCards = uniqueCards.slice(0, 6);
   const nonPrimaryCards = uniqueCards.slice(6);
+
+  allCards.forEach((card) => {
+    console.log(`desc: ${card.desc} img: ${card.img} title: ${card.title} url: ${card.url}`);
+  });
 
   return (
     <>

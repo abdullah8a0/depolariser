@@ -2,7 +2,7 @@
 
 .boxWrapper-1 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: auto 1fr;
   background-color: var(--primary-color);
   grid-gap: 0.5rem;
@@ -20,6 +20,13 @@
 
 h4 {
   margin-bottom: 0.5rem;
+  font-size: medium;
+}
+
+.sectionHeading {
+  margin: 1rem;
+  color: var(--depolariser-orange);
+  border-radius: 0.5rem;
 }
 
 .content {
@@ -29,7 +36,7 @@ h4 {
 
 .boxWrapper-2 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr;
   grid-template-rows: repeat(3, auto);
   background-color: var(--primary-color);
   grid-gap: 0.5rem;
@@ -39,11 +46,6 @@ h4 {
   border-radius: 0rem 0.5rem 0.5rem 0.5rem;
 }
 
-.boxWrapper-2 > .content {
-  grid-column-start: 1;
-  grid-column-end: 5;
-}
-
 .four-way-card {
   display: grid;
   grid-template-columns: 1fr;
@@ -51,8 +53,6 @@ h4 {
   background-color: var(--primary-color);
   grid-gap: 0.5rem;
 
-  margin: 1rem;
-  padding: 1rem;
   border-radius: 0rem 0.5rem 0.5rem 0.5rem;
 }
 
@@ -67,14 +67,60 @@ h4 {
   grid-column-end: 2;
 }
 
+.chart {
+  width: 10rem;
+}
 .boxWrapper-3 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(8, auto);
   background-color: var(--primary-color);
   grid-gap: 0.5rem;
 
   margin: 1rem;
   padding: 1rem;
   border-radius: 0rem 0.5rem 0.5rem 0.5rem;
+}
+
+.eight-way-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  background-color: var(--primary-color);
+  grid-gap: 0.5rem;
+
+  border-radius: 0rem 0.5rem 0.5rem 0.5rem;
+}
+
+.eight-way-card > .smallTitle {
+  margin: 0;
+  color: var(--depolariser-orange);
+  border-radius: 0.5rem;
+}
+
+.eight-way-card > .content {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+@media screen and (min-width: 768px) {
+  .boxWrapper-1 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+
+  .boxWrapper-2 {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .boxWrapper-2 > .content {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+
+  .boxWrapper-3 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
 }
