@@ -24,7 +24,6 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: ["@babel/polyfill", entryFile],
-  allowedHosts: ["all"],
   output: {
     path: outputDir,
     publicPath: "/",
@@ -62,7 +61,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif|ico)$/,
         use: [
           {
             loader: "url-loader",
