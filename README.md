@@ -1,75 +1,22 @@
-# Project Skeleton
+# Depolariser
 
-## What we provide
+Depolariser is a platform that suggests news articles and sources to promote exposure to opposing viewpoints. Our goal is to create a safe environment that encourages critical thinking and informed discourse by diversifying the news sources consumed by the public.
 
-- Google Auth (Skeleton.js & auth.js)
-  - Disclaimer: Auth isn't being taught until the second week.
-- Socket Infrastructure (client-socket.js & server-socket.js)
-  - Disclaimer: Socket isn't being taught until the second week.
-- User Model (auth.js & user.js)
+The website is deployed at [depolariser.herokuapp.com](depolariser.herokuapp.com). To learn more about the project, check out our [Learn More](depolariser.herokuapp.com/learnmore) page. It was built using React, Node.js, Express, and MongoDB.
 
-## What you need to change
+## Getting Started
 
-- Change the font in utilities.css
-- Change the Frontend CLIENT_ID for Google Auth (Skeleton.js) (we'll talk about it at the end of week 2)
-- Change the Server CLIENT_ID for Google Auth (auth.js) (we'll talk about it at the end of week 2)
-- Change the Database SRV for Atlas (server.js)
-- Change the Database Name for MongoDB (server.js)
-- Add a favicon to your website at the path client/dist/favicon.ico
-- Update website title in client/dist/index.html
-- Update this README file ;)
-- Update the package.json file with your app name :) (line 2)
+To run the project locally, you will need to install [Node.js](https://nodejs.org/en/). Once you have Node.js installed, run the following commands in the project directory:
 
-## Socket stuff
-
-Note: we'll be getting to this in lecture in week 2, so don't worry if you don't know it yet
-
-- If you're not using realtime updating or don't need server->client communication, you can remove socket entirely! (server-socket.js, client-socket.js, and anything that imports them)
-- If you are using socket, consider what you want to do with the FIXME in server-socket.js
-
-## How to integrate into your own project
-
-On GitHub download this repository as a zip file, then extract the files into your own repository.
-Warning: make sure you copy the hidden files too: .babelrc, .gitignore, .npmrc, and .prettierrc
-
-Note that you should create a `.env` file to store your secrets. You should have the mongo srv and session secret there. A session secret is just a secret string so the session library can encrypt session data. See `.env.example`.
-
-## Typescript Instructions
-
-This branch is configured to use Typescript in both the frontend and backend.
-In the frontend, if you decide to use TS, you will need to define the Props and State interface for each component.
-In the backend, make sure that you include type signatures when needed.
-
-If you want to come use a js server, change the "start" script of package.json to `"start": "nodemon --ignore client/",` instead of
-`"TS_NODE_PROJECT='./tsconfig.json' nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/server.ts"`
-
-If you want to modify how TS is compiled, you should modify tsconfig.json.
-
-**Sharing interfaces**
-
-In the shared folder, you can export shared interfaces between the frontend and backend. This is to make get and post requests typesafe. Make sure that the interface is in sync with the mongoose schema! See server/models/User.ts.
-
-**Note**
-
-When installing packages, you will also have to install their type signatures. If the TypeScript compiler
-is complaining that some package does not have any type signatures, make sure to do `npm install @types/nameOfPackageHere`. Note that because Heroku deletes all the devDependencies after the build step, make sure to do `npm install dependencyThatTheServerNeeds`. In this setup, you should only include use `npm install somePackage --save-dev` on client-side devDependencies.
-
-## don't touch
-
-the following files students do not need to edit. feel free to read them if you would like.
-
-```
-client/src/index.js
-client/src/utilities.js
-client/src/client-socket.js
-server/validator.js
-server/server-socket.js
-tsconfig.json
-.babelrc
-.npmrc
-.prettierrc
-package-lock.json
-webpack.config.js
+```bash
+npm install
+npm run start
 ```
 
-## Good luck on your project :)
+This will install the necessary dependencies and start the server. The website will be available at [localhost:3000](http://localhost:3000).
+
+## Usage
+
+After logging in, you need to navigate to the test page to take the test. The test will ask you to rate your agreement with a series of statements. After completing the test, you will be redirected to the feed page, where you can view articles and sources that are recommended for you. You can also view your results on the top of the page.
+
+You can come back to the feed page at any time to view new articles and sources. You can also take the test again to update your results.
