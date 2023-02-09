@@ -2,7 +2,7 @@
 
 Depolariser is a platform that suggests news articles and sources to promote exposure to opposing viewpoints. Our goal is to create a safe environment that encourages critical thinking and informed discourse by diversifying the news sources consumed by the public.
 
-The website is deployed at [depolariser.herokuapp.com](depolariser.herokuapp.com). To learn more about the project, check out our [Learn More](depolariser.herokuapp.com/learnmore) page. It was built using React, Node.js, Express, and MongoDB.
+The website is deployed at [depolariser.herokuapp.com](https://depolariser.herokuapp.com). To learn more about the project, check out our [Learn More](https://depolariser.herokuapp.com/learnmore) page. It was built using React, Node.js, Express, and MongoDB. The CSS and styling was done completely manually.
 
 ## Getting Started
 
